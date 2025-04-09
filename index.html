@@ -16,16 +16,16 @@
         <header class="l-header">
             <nav class="nav bd-grid">
                 <div>
-                    <a href="/" class="nav__logo">Sonichigo</a>
+                    <a href="/" class="nav__logo"><img src="assets/img/logo.webp" alt="Learn With Sonichigo"></a>
                 </div>
 
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
                         <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="about.html" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="events.html" class="nav__link">Events</a></li>
                         <li class="nav__item"><a href="https://blog.sonichigo.com" class="nav__link">Blogs</a></li>
-                        <!-- <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
-                        <li class="nav__item"><a href="#connect" class="nav__link">Connect</a></li> -->
+                       <!--  <li class="nav__item"><a href="#connect" class="nav__link">Connect</a></li> -->
                     </ul>
                 </div>
 
@@ -39,32 +39,48 @@
             <!--===== HOME =====-->
             <section class="home bd-grid" id="home">
                 <div class="home__data">
-                    <h1 class="home__title">Hi,<br>I'am <span class="home__title-color">Animesh</span><br>DevRel, Artist, <br>Community Guy</h1>
+                    <h1 class="home__title">Hey,<br>I am <span class="home__title-color">Animesh Pathak</span></h1>
+                    <h2 class="home__subtitle">DevRel, OSS, and Tinker</h2>
 <!-- 
                     <a href="#" class="button">Connect</a> -->
                 </div>
 
                 <div class="home__social">
-                    <a href="http://linkedin.com/in/sonichigo" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
-                    <a href="https://x.com/@sonichigo1219" class="home__social-icon"><i class='bx bxl-twitter' ></i></a>
-                    <a href="https://github.com/sonichigo" class="home__social-icon"><i class='bx bxl-github' ></i></a>
-                </div>
+                    <div class="tooltip">
+                      <a href="https://linkedin.com/in/sonichigo" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
+                      <span class="tooltip-text">→ LinkedIn</span>
+                    </div>
+                    <div class="tooltip">
+                      <a href="https://x.com/@sonichigo1219" class="home__social-icon"><i class='bx bxl-twitter'></i></a>
+                      <span class="tooltip-text">→ Twitter</span>
+                    </div>
+                    <div class="tooltip">
+                      <a href="https://github.com/sonichigo" class="home__social-icon"><i class='bx bxl-github'></i></a>
+                      <span class="tooltip-text">→ GitHub</span>
+                    </div>
+                    <div class="tooltip">
+                      <a href="https://github.com/sponsor/sonichigo" class="home__social-icon"><i class='bx bx-coffee-togo'></i></a>
+                      <span class="tooltip-text">→ Sponsor Me</span>
+                    </div>
+                  </div>
+                  
 
                 <div class="home__img">
-                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                            <image class="home__blob-img" x="50" y="110" href="assets/img/hero.png"/>
-                        </g>
+                    <svg class="home__blob" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                      <mask id="circleMask" mask-type="alpha">
+                        <circle cx="100" cy="100" r="100" fill="#fff" />
+                      </mask>
+                      <g mask="url(#circleMask)">
+                        <circle cx="100" cy="100" r="100" fill="var(--first-color)" />
+                        <image class="home__blob-img" x="0" y="0" width="200" height="200" href="assets/img/hero.png" />
+                      </g>
                     </svg>
-                </div>
+                  </div>
+                  
             </section>
 
             <!--===== ABOUT =====-->
-            <section class="about section " id="about">
+<!--             <section class="about section " id="about">
                 <h2 class="section-title">About</h2>
 
                 <div class="about__container bd-grid">
@@ -79,7 +95,7 @@
                             I have organized and co-organised more than 40+ events in Bhubaneswar, Noida, Bengaluru and is the organizer of MoT Bengaluru. I have also speaked at multiple events recently being <b>GitTogether</b> and <b>DevOpsDayBLR</b>.</p>           
                     </div>                                   
                 </div>
-            </section>
+            </section> -->
 
             <!-- ===== SKILLS =====
             <section class="skills section" id="skills">
@@ -187,14 +203,14 @@
         </main> -->
 
         <!--===== FOOTER =====-->
-        <footer class="footer">
+        <!-- <footer class="footer">
             <p class="footer__title">Sonichigo</p>
             <div class="footer__social">
                 <a href="https://github.com/sonichigo" class="footer__icon"><i class='bx bxl-github' ></i></a>
                 <a href="https://linkedin.com/in/sonichigo" class="footer__icon"><i class='bx bxl-linkedin' ></i></a>
                 <a href="https://x.com/@sonichigo1219" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
             </div>
-        </footer>
+        </footer> -->
 
 
         <!--===== SCROLL REVEAL =====-->

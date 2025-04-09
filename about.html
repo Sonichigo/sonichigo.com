@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me | Learn with Sonichigo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!--===== HEADER =====-->
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div>
+                <a href="/" class="nav__logo"><img src="assets/img/logo.webp" alt="Learn With Sonichigo"></a>
+            </div>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link active-link">About</a></li>
+                    <li class="nav__item"><a href="events.html" class="nav__link">Events</a></li>
+                    <li class="nav__item"><a href="https://blog.sonichigo.com" class="nav__link">Blogs</a></li>
+                   <!--  <li class="nav__item"><a href="#connect" class="nav__link">Connect</a></li> -->
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+
+
+  <main class="l-main">
+    <section class="section bd-grid">
+      <h1 class="section-title">About Me</h1>
+      <div class="about__img">
+        <svg class="home__blob" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <mask id="circleMask" mask-type="alpha">
+            <circle cx="100" cy="100" r="100" fill="#fff" />
+          </mask>
+          <g mask="url(#circleMask)">
+            <circle cx="100" cy="100" r="100" fill="var(--first-color)" />
+            <image class="home__blob-img" x="0" y="0" width="90" height="90" href="assets/img/profile.png" />
+          </g>
+        </svg>
+      </div>
+      <h2>Who I Am</h2>
+      <div class="card">
+        <p>
+          With a background in software engineering and developer relations, I focus on helping developers succeed through clear documentation, useful tooling, and vibrant communities. Currently at Keploy, I'm working on making API testing easier and more reliable.
+        </p>
+      </div>
+    </section>
+
+    <section class="section bd-grid">
+        <h2>What I Do</h2>
+        <div class="about-grid">
+          <div class="card">
+            <h3>Developer Relations</h3>
+            <p>At Keploy, I drive developer advocacy, content, and technical community engagement across APAC, making API testing more dev-friendly.</p>
+          </div>
+          <div class="card">
+            <h3>Community Building</h3>
+            <p>Organized/co-organized <strong>40+ events</strong> in Bhubaneswar, Noida, Bengaluru. Organizer of <strong>MoT Bengaluru</strong> and <strong>CNCF Noida</strong>.</p>
+          </div>
+          <div class="card">
+            <h3>Public Speaking</h3>
+            <p>Spoken at global and national events like <strong>GitTogether</strong>, <strong>DevOpsDays BLR</strong>, <strong>OSS EU</strong>, <strong>DevSecCon'22</strong>, and <strong>DevRelCon India'25</strong>.</p>
+          </div>
+        </div>
+      </section>
+  
+      <section class="section bd-grid">
+        <h2>Hackathons & Achievements</h2>
+        <div class="about-grid">
+          <div class="card">
+            <h3>MLH Wins</h3>
+            <p>🏆 Winner at <strong>SharkHacks</strong>, <strong>WildHacks</strong>, and <strong>HackAroundTheWorld</strong>.</p>
+          </div>
+          <div class="card">
+            <h3>Azure Hackathon</h3>
+            <p>🏅 Winner of an <strong>Azure Hackathon</strong> focused on cloud-native innovation and scalability.</p>
+          </div>
+          <div class="card">
+            <h3>Leadership Roles</h3>
+            <p>Mentor and leader across student and professional communities, contributing to tech growth and security awareness.</p>
+          </div>
+        </div>
+      </section>
+  
+      <section class="section bd-grid">
+        <h2>Skills</h2>
+        <div class="about-grid">
+          <div class="card"><strong>Languages:</strong> JavaScript, Go, Python, Rust, C#, SQL</div>
+          <div class="card"><strong>Frameworks:</strong> NextJS, Express, Flask, Gin, .Net, Rocket, Sqlx</div>
+          <div class="card"><strong>Tools:</strong> Git, Docker, Postman, Keploy, VScode, GitHub, Twilio, Postgres, MongoDB, Prisma</div>
+          <div class="card"><strong>Cloud & DevOps:</strong> Microsoft Azure</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+            <p class="footer__title">Sonichigo</p>
+            <div class="footer__social">
+                <a href="https://github.com/sonichigo" class="footer__icon"><i class='bx bxl-github' ></i></a>
+                <a href="https://linkedin.com/in/sonichigo" class="footer__icon"><i class='bx bxl-linkedin' ></i></a>
+                <a href="https://x.com/@sonichigo1219" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+            </div>
+    </footer>
+
+</body>
+</html>

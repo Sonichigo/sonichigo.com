@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Events | Learn with Sonichigo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!--===== HEADER =====-->
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div>
+                <a href="/" class="nav__logo"><img src="assets/img/logo.webp" alt="Learn With Sonichigo"></a>
+            </div>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="events.html" class="nav__link active-link">Events</a></li>
+                    <li class="nav__item"><a href="https://blog.sonichigo.com" class="nav__link">Blogs</a></li>
+                   <!--  <li class="nav__item"><a href="#connect" class="nav__link">Connect</a></li> -->
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+
+
+  <main class="l-main">
+    <section class="section bd-grid" id="events-section">
+      <h1 class="section-title">My Events</h1>
+      <div class="about-grid" id="events-container">
+
+      </div>
+    </section>
+    </main>
+
+    <footer class="footer">
+            <p class="footer__title">Sonichigo</p>
+            <div class="footer__social">
+                <a href="https://github.com/sonichigo" class="footer__icon"><i class='bx bxl-github' ></i></a>
+                <a href="https://linkedin.com/in/sonichigo" class="footer__icon"><i class='bx bxl-linkedin' ></i></a>
+                <a href="https://x.com/@sonichigo1219" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+            </div>
+    </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const jsonData = document.getElementById('events-data').textContent;
+        const data = JSON.parse(jsonData);
+    
+        const container = document.getElementById('events-container');
+        data.forEach(event => {
+          const card = document.createElement('div');
+          card.classList.add('card');
+          card.innerHTML = `
+            <img src="${event.image}" alt="${event.title}" style="width:100%; border-radius: 12px; margin-bottom: 10px;">
+            <h3>${event.title}</h3>
+            <p>${event.description}</p>
+            <p> Check out <a href="${event.url}"> here </a></p>
+            <small><strong>Date:</strong> ${new Date(event.date).toLocaleDateString()}</small>
+          `;
+          container.appendChild(card);
+        });
+      });
+    </script> 
+    <script id="events-data" type="application/json">
+      [
+        {
+          "title": "DevRelCon India 2025",
+          "description": "SEO for DevRel, and the Impact It Creates on the Business",
+          "date": "2024-12-06",
+          "image": "assets/img/data/devrelcon.jpeg",
+          "url": "https://blr24.devrelcon.dev/"
+        },
+        {
+          "title": "CNCF Hooghly Feb 2025",
+          "description": "Testing in production with eBPF",
+          "date": "2025-04-08",
+          "image": "assets/img/data/cncf-hooghly-feb.jpeg",
+          "url": "https://community.cncf.io/events/details/cncf-cloud-native-hooghly-presents-kubekulture/"
+        },
+        {
+          "title": "Open Source Summit EU 2024",
+          "description": "How to Generate Test-Cases and Data Mocks for Microservices at Kernel Using eBPF",
+          "date": "2024-09-17",
+          "image": "assets/img/data/oss-eu-24.jpeg",
+          "url": "https://www.youtube.com/watch?v=VoV2eyTiFyY"
+        },
+        {
+          "title": "API World 2024",
+          "description": "Ship Features Faster with AI Based Testing Using Keploy",
+          "date": "2024-11-13",
+          "image": "assets/img/data/apiworld-2024.png",
+          "url": "https://apiworld2024.sched.com/event/1kita/virtual-exclusive-pro-session-api-ship-features-faster-with-ai-based-testing-using-keploy"
+        },
+        {
+          "title": "DevOpsDays Bangalore 2023",
+          "description": "Understanding eBPF Tracing",
+          "date": "2023-12-13",
+          "image": "assets/img/data/devopsdays-23-blr.png",
+          "url": "https://www.youtube.com/watch?v=Q7-fDN3ZOuc"
+        },
+        {
+          "title": "DevSecCon 2022",
+          "description": "Infuse Security Into your SDLC",
+          "date": "2022-06-15",
+          "image": "assets/img/data/devseccon-22.jpeg",
+          "url": "https://www.youtube.com/watch?v=SiDQJqRsUDE"
+        }
+      ]
+      </script>       
+</body>
+</html>
