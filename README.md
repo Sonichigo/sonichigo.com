@@ -1,14 +1,18 @@
-# Portfolio Responsive Complete
-## [Watch it on youtube](https://youtu.be/AKNvTxWOdKw)
-### Portfolio Responsive Complete
+# sonichigo.com
 
-- Responsive Personal Portfolio Website HTML CSS & JavaScript.
-- Contains animations when scrolling.
-- Smooth scrolling in each section.
-- Developed first with the Mobile First methodology, then for desktop.
-- Compatible with all mobile devices and with a beautiful and pleasant user interface.
+Welcome to my personal website repository! This is the source code for my portfolio and blog hosted at sonichigo.com.
 
-💙 Join the channel to see more videos like this. [Bedimcode](https://www.youtube.com/@Bedimcode)
+## Overview
 
-![preview img](/preview.png)
+This repository contains the code and content for my personal website. Here you'll find:
+- My works
+- Blog posts
 
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+- Website: [sonichigo.com](https://sonichigo.com)
+- GitHub: [@sonichigo](https://github.com/sonichigo)
