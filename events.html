@@ -36,8 +36,13 @@
   <main class="l-main">
     <section class="section bd-grid" id="events-section">
       <h1 class="section-title">My Events</h1>
+      <h2 class="section-subtitle">Spoken at</h2>
       <div class="about-grid" id="events-container">
 
+      </div>
+      <h2 class="section-subtitle">Host of:</h2>
+      <div class="about-grid" id="hosting-container">
+      
       </div>
     </section>
     </main>
@@ -96,10 +101,17 @@
           "url": "https://community.cncf.io/events/details/cncf-cloud-native-hooghly-presents-kubekulture/"
         },
         {
+          "title": "CNCF Chennai Feb 2025",
+          "description": "Improving Developer Productivity with DevPod",
+          "date": "2025-02-22",
+          "image": "assets/img/data/cncf-chennai-feb-2025.jpeg",
+          "url": "https://community.cncf.io/events/details/cncf-cloud-native-chennai-presents-cloud-native-chennai-feb-2025-meetup"
+        },
+        {
           "title": "Open Source Summit EU 2024",
           "description": "How to Generate Test-Cases and Data Mocks for Microservices at Kernel Using eBPF",
           "date": "2024-09-17",
-          "image": "assets/img/data/oss-eu-24.jpeg",
+          "image": "assets/img/data/oss-eu-2024.jpeg",
           "url": "https://www.youtube.com/watch?v=VoV2eyTiFyY"
         },
         {
@@ -108,6 +120,20 @@
           "date": "2024-11-13",
           "image": "assets/img/data/apiworld-2024.png",
           "url": "https://apiworld2024.sched.com/event/1kita/virtual-exclusive-pro-session-api-ship-features-faster-with-ai-based-testing-using-keploy"
+        },
+        {
+          "title": "Platform Meetup July 2024 - Bangalore",
+          "description": "Building Microservices with DevPod and Keploy",
+          "date": "2024-07-09",
+          "image": "https://cdn.prod.website-files.com/65a5be30bf4809bb3a2e8aff/668da27a2d82a83d1847dec2_0qg3enjmxg.webp",
+          "url": "https://www.loft.sh/blog/platform-bengaluru-meetup-recap"
+        },
+        {
+          "title": "GirlScript Summer of Code",
+          "description": "Improving Developer Productivity with DevPod",
+          "date": "2024-06-26",
+          "image": "assets/img/data/gssoc-june-24.jpg",
+          "url": "https://www.youtube.com/watch?v=1DP6WDTsL8s"
         },
         {
           "title": "DevOpsDays Bangalore 2023",
@@ -124,7 +150,37 @@
           "url": "https://www.youtube.com/watch?v=SiDQJqRsUDE"
         }
       ]
+      </script> 
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const jsonData = document.getElementById('host-data').textContent;
+          const data = JSON.parse(jsonData);
+      
+          const container = document.getElementById('hosting-container');
+          data.forEach(event => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+              <img src="${event.image}" alt="${event.title}" style="width:100%; border-radius: 12px; margin-bottom: 10px;">
+              <h3>${event.title}</h3>
+              <p>${event.description}</p>
+              <p> Check out <a href="${event.url}"> here </a></p>
+            `;
+            container.appendChild(card);
+          });
+        });
       </script>    
+      <script id="host-data" type="application/json">
+        [
+          {
+            "title": "Chat with Dev's – A Developer-Focused Deep Dive into Modern Cloud-Native Networkin",
+            "description": "Welcome to Chat with Dev's, a casual yet insightful video series where we explore the evolving world of cloud-native infrastructure, tracing technologies, and service mesh innovations. Whether you're a platform engineer, SRE, or just eBPF-curious, this playlist is your go-to source for practical discussions, real-world use cases, and emerging trends in the ecosystem.",
+            "image": "assets/img/data/chat-with-dev.png",
+            "url": "https://www.youtube.com/playlist?list=PLuImHQnqnB_byPVwIwG7P7FPaToHm150c"
+          }
+      ]
+      </script>
       
       <!--===== SCROLL REVEAL =====-->
       <script src="https://unpkg.com/scrollreveal"></script>
