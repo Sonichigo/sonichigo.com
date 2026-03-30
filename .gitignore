@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment
+.env.local
+.env
+
+# System files
+.DS_Store
+
+# Documentation (keep only important ones)
+*.md
+!README.md
+!data/*.md
+
+# Lock files
+package-lock.json
