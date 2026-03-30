@@ -1,0 +1,273 @@
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     NEW CONTENT UPDATE FLOW                              │
+└─────────────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════
+ HASHNODE POSTS (Automatic ✅)
+═══════════════════════════════════════════════════════════════════════════
+
+  You publish on Hashnode
+         │
+         ├──> RSS feed updates instantly
+         │    https://sonichigo.hashnode.dev/rss.xml
+         │
+         ▼
+  [0-60 min] Next.js ISR Cache
+         │    (revalidate: 3600)
+         │
+         ▼
+  Server fetches new RSS data
+         │
+         ├──> Saves to IndexedDB (client-side)
+         │    TTL: 1 hour
+         │
+         ├──> Generates markdown backup
+         │    backups/posts-backup-YYYY-MM-DD.md
+         │
+         ▼
+  [0-60 min] IndexedDB Cache Expires
+         │
+         ▼
+  Visitor sees new post! ✅
+
+  Total delay: Up to 2 hours (typical: 30-60 min)
+
+
+═══════════════════════════════════════════════════════════════════════════
+ KEPLOY POSTS (Semi-Automatic ⚙️)
+═══════════════════════════════════════════════════════════════════════════
+
+  You publish on Keploy blog
+         │
+         ├──> Post appears on author page
+         │    https://keploy.io/blog/authors/Animesh%20Pathak
+         │
+         ├──> RSS feeds update
+         │    https://keploy.io/blog/community/rss.xml
+         │    https://keploy.io/blog/technology/rss.xml
+         │
+         ▼
+  [0-60 min] Next.js ISR Cache
+         │
+         ▼
+  Server scrapes author page
+         │
+         ├──> Extracts post URLs
+         │
+         ├──> Matches URLs against RSS feeds
+         │    (to get title, date, excerpt)
+         │
+         ▼
+  Post data saved to IndexedDB
+         │
+         ├──> Markdown backup generated
+         │
+         ▼
+  [0-60 min] Client cache expires
+         │
+         ▼
+  Visitor sees new post! ✅
+
+  Total delay: Up to 2 hours (typical: 30-60 min)
+
+
+═══════════════════════════════════════════════════════════════════════════
+ HARNESS POSTS (Manual 📝)
+═══════════════════════════════════════════════════════════════════════════
+
+  You publish on Harness blog
+         │
+         ▼
+  ⚠️ MANUAL STEP REQUIRED ⚠️
+         │
+  Edit src/lib/rss.ts:
+  ├──> Add URL to HARNESS_KNOWN_URLS (REQUIRED)
+  └──> Add post to HARNESS_FALLBACK_POSTS (optional)
+         │
+         ▼
+  npm run build
+         │
+         ├──> Server fetches Harness RSS
+         │    https://www.harness.io/blog/rss.xml
+         │
+         ├──> Filters posts by known URLs
+         │
+         ├──> Matches your new URL
+         │
+         ▼
+  Post data immediately available
+         │
+         ├──> Saved to IndexedDB
+         │
+         ├──> Markdown backup generated
+         │
+         ▼
+  Visitor sees new post! ✅
+
+  Total delay: Immediate after rebuild
+
+
+═══════════════════════════════════════════════════════════════════════════
+ GITHUB REPOS (Automatic ✅)
+═══════════════════════════════════════════════════════════════════════════
+
+  You create/update GitHub repo
+         │
+         ├──> GitHub API updates instantly
+         │    https://api.github.com/users/Sonichigo/repos
+         │
+         ▼
+  [0-60 min] Next.js ISR Cache
+         │
+         ▼
+  Server fetches via GitHub API
+         │
+         ├──> Sorts by recently updated
+         │
+         ├──> Takes top 4 repos
+         │
+         ▼
+  Saved to IndexedDB
+         │
+         ├──> Markdown backup generated
+         │
+         ▼
+  [0-60 min] Client cache expires
+         │
+         ▼
+  Visitor sees new repo! ✅
+
+  Total delay: Up to 2 hours (typical: 30-60 min)
+
+
+═══════════════════════════════════════════════════════════════════════════
+ FORCE IMMEDIATE UPDATE
+═══════════════════════════════════════════════════════════════════════════
+
+  Option 1: Rebuild
+  ┌─────────────────────────────────┐
+  │  npm run build                  │
+  │  npm run start                  │
+  └─────────────────────────────────┘
+       │
+       ├──> Clears Next.js cache
+       ├──> Fetches fresh data
+       └──> Ready immediately ✅
+
+
+  Option 2: Clear Client Cache
+  ┌─────────────────────────────────┐
+  │  Browser DevTools               │
+  │  → Application                  │
+  │  → IndexedDB                    │
+  │  → sonichigo_cache              │
+  │  → Delete Database              │
+  └─────────────────────────────────┘
+       │
+       ├──> Clears IndexedDB
+       ├──> Next page load fetches fresh
+       └──> Ready on next visit ✅
+
+
+  Option 3: Hard Refresh Browser
+  ┌─────────────────────────────────┐
+  │  Cmd+Shift+R (Mac)              │
+  │  Ctrl+Shift+R (Windows)         │
+  └─────────────────────────────────┘
+       │
+       └──> Bypasses browser cache ✅
+
+
+═══════════════════════════════════════════════════════════════════════════
+ CACHE LAYERS
+═══════════════════════════════════════════════════════════════════════════
+
+  Layer 1: External Sources (RSS feeds, GitHub API)
+           ↓
+  Layer 2: Next.js ISR Cache (Server-side, 1 hour)
+           ↓
+  Layer 3: IndexedDB (Client-side, 1 hour)
+           ↓
+  Layer 4: Markdown Backups (Filesystem, permanent)
+           ↓
+  Layer 5: Browser Cache (Browser, varies)
+
+
+  To clear ALL layers:
+  ┌─────────────────────────────────┐
+  │  rm -rf .next                   │  ← Next.js cache
+  │  npm run build                  │  ← Rebuild
+  │  [Delete IndexedDB manually]    │  ← Client cache
+  │  Cmd+Shift+R                    │  ← Browser cache
+  └─────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════
+ TROUBLESHOOTING DECISION TREE
+═══════════════════════════════════════════════════════════════════════════
+
+  Post not showing?
+         │
+         ├──> Is it Harness?
+         │    │
+         │    ├──> YES → Did you add to HARNESS_KNOWN_URLS?
+         │    │          │
+         │    │          ├──> NO → Add it, rebuild ✅
+         │    │          └──> YES → Check URL matches exactly
+         │    │
+         │    └──> NO → Continue below
+         │
+         ├──> Is it published? (not draft)
+         │    │
+         │    └──> NO → Publish it first ✅
+         │
+         ├──> Is it in RSS feed?
+         │    │
+         │    │  curl https://sonichigo.hashnode.dev/rss.xml
+         │    │  curl https://keploy.io/blog/community/rss.xml
+         │    │
+         │    └──> NO → Wait for RSS to update, or check if deleted
+         │
+         ├──> Has it been > 2 hours?
+         │    │
+         │    ├──> NO → Wait or force rebuild
+         │    └──> YES → Continue below
+         │
+         ├──> Clear Next.js cache
+         │    npm run build
+         │
+         ├──> Clear IndexedDB
+         │    DevTools → Application → Delete
+         │
+         ├──> Hard refresh browser
+         │    Cmd+Shift+R
+         │
+         └──> Still not working?
+              │
+              └──> Check server logs:
+                   npm run build 2>&1 | grep -i "post-title"
+
+
+═══════════════════════════════════════════════════════════════════════════
+ QUICK REFERENCE
+═══════════════════════════════════════════════════════════════════════════
+
+  Hashnode:  Publish → Wait 1-2hr → Done ✅
+  Keploy:    Publish → Wait 1-2hr → Done ✅
+  Harness:   Publish → Edit rss.ts → Rebuild → Done ✅
+  GitHub:    Create → Wait 1-2hr → Done ✅
+
+  Force update: npm run build 🚀
+
+  Files to edit (Harness only):
+    src/lib/rss.ts:50  → HARNESS_KNOWN_URLS
+    src/lib/rss.ts:59  → HARNESS_FALLBACK_POSTS (optional)
+
+  Cache TTLs:
+    Server:  3600s (1 hour)
+    Client:  3600s (1 hour)
+    Total:   Up to 2 hours maximum
+
+
+═══════════════════════════════════════════════════════════════════════════

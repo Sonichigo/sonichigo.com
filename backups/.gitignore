@@ -1,0 +1,3 @@
+# Ignore all markdown backups except README
+*.md
+!README.md
