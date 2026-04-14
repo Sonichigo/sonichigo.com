@@ -6,6 +6,8 @@ export interface Talk {
   event_url: string | null;
   date: string | null;
   location: string | null;
+  latitude: number | null;
+  longitude: number | null;
   type: "speaker" | "host" | "panelist" | "workshop";
   image_url: string | null;
   video_url: string | null;

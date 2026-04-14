@@ -32,7 +32,7 @@ export default function TalksPage() {
   const uniqueCities = new Set(talks.map((t) => t.location).filter(Boolean)).size;
 
   return (
-    <div className="section-container">
+    <div className="max-w-7xl mx-auto px-6 py-16">
       <h1 className="page-title">Sessions & Talks</h1>
       <p className="page-subtitle">
         Technical presentations on cloud native technologies, eBPF, DevOps, and
@@ -44,10 +44,10 @@ export default function TalksPage() {
         <div className="mb-10">
           <div className="flex gap-6 mb-6 text-xs font-mono" style={{ color: "var(--text-tertiary)" }}>
             <span>
-              <span style={{ color: "var(--accent)" }}>{talks.length}</span> talks
+              <span style={{ color: "var(--accent-green)" }}>{talks.length}</span> talks
             </span>
             <span>
-              <span style={{ color: "var(--accent)" }}>{uniqueCities}</span> cities
+              <span style={{ color: "var(--accent-orange)" }}>{uniqueCities}</span> cities
             </span>
           </div>
 
@@ -142,7 +142,14 @@ export default function TalksPage() {
                     )}
                   </div>
                 </div>
-                <span className="tag-pill shrink-0 hidden sm:inline">
+                <span
+                  className={`shrink-0 hidden sm:inline ${
+                    talk.type === 'speaker' ? 'tag-pill' :
+                    talk.type === 'workshop' ? 'tag-pill-green' :
+                    talk.type === 'panelist' ? 'tag-pill-orange' :
+                    'tag-pill'
+                  }`}
+                >
                   {talk.type}
                 </span>
               </div>

@@ -25,7 +25,7 @@ export default function HomeContent({
   const [repos, setRepos] = useState<GitHubRepo[]>(initialRepos);
   const [profile, setProfile] = useState<any>(initialProfile);
   const [avatarUrl, setAvatarUrl] = useState<string>(
-    initialProfile?.avatar_url || "/images/header-image/Animesh-vienna.jpg"
+    initialProfile?.avatar_url || "/profile.png"
   );
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,7 +53,7 @@ export default function HomeContent({
         // Handle avatar with fallback
         const finalAvatarUrl = await preloadImageWithFallback(
           cachedProfile?.avatar_url,
-          "/images/header-image/Animesh-vienna.jpg"
+          "/profile.png"
         );
         if (mounted) setAvatarUrl(finalAvatarUrl);
 
@@ -78,7 +78,7 @@ export default function HomeContent({
   const displayRepos = repos.slice(0, 4);
 
   return (
-    <div className="section-container">
+    <div className="max-w-7xl mx-auto px-6 py-16">
       {/* Hero */}
       <section className="pt-8 pb-16">
         <div className="flex flex-col-reverse sm:flex-row sm:items-start sm:justify-between gap-8 mb-8">
@@ -123,8 +123,7 @@ export default function HomeContent({
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   // Final fallback if both fail
-                  (e.target as HTMLImageElement).src =
-                    "/images/header-image/Animesh-vienna.jpg";
+                  (e.target as HTMLImageElement).src = "/profile.png";
                 }}
               />
             </div>
@@ -169,8 +168,8 @@ export default function HomeContent({
             <span
               className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
               style={{
-                background: "var(--accent-dim)",
-                color: "var(--accent)",
+                background: "var(--accent-green-dim)",
+                color: "var(--accent-green)",
               }}
             >
               C
@@ -196,8 +195,8 @@ export default function HomeContent({
             <span
               className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
               style={{
-                background: "var(--accent-dim)",
-                color: "var(--accent)",
+                background: "var(--accent-green-dim)",
+                color: "var(--accent-green)",
               }}
             >
               M
@@ -354,7 +353,7 @@ export default function HomeContent({
                   </p>
                 )}
                 {repo.language && (
-                  <span className="tag-pill mt-3 inline-block">{repo.language}</span>
+                  <span className="tag-pill-green mt-3 inline-block">{repo.language}</span>
                 )}
               </a>
             ))}

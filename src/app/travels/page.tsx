@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import dynamic from "next/dynamic";
-import type { Travel } from "@/lib/types";
+import type { Travel, Talk } from "@/lib/types";
 
 // Import WorldMap with SSR disabled (Leaflet requires window)
 const WorldMap = dynamic(() => import("@/components/WorldMap").then((mod) => mod.WorldMap), {
@@ -12,7 +12,7 @@ const WorldMap = dynamic(() => import("@/components/WorldMap").then((mod) => mod
       className="w-full rounded-lg"
       style={{
         height: "500px",
-        backgroundColor: "#404040",
+        backgroundColor: "#1a1f2e",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -27,13 +27,17 @@ const WorldMap = dynamic(() => import("@/components/WorldMap").then((mod) => mod
 
 export default function TravelsPage() {
   const [travels, setTravels] = useState<Travel[]>([]);
+  const [talks, setTalks] = useState<Talk[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/travels")
-      .then((r) => r.json())
-      .then((data) => {
-        setTravels(data);
+    Promise.all([
+      fetch("/api/travels").then((r) => r.json()),
+      fetch("/api/talks").then((r) => r.json()),
+    ])
+      .then(([travelsData, talksData]) => {
+        setTravels(travelsData);
+        setTalks(talksData);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -48,8 +52,50 @@ export default function TravelsPage() {
   const uniqueCountries = Object.keys(countries).length;
   const uniqueCities = new Set(travels.map((t) => t.city)).size;
 
+  // Group talks by location (city, country)
+  const talksByLocation = useMemo(() => {
+    const grouped: Record<string, Talk[]> = {};
+    talks.forEach((talk) => {
+      if (talk.location) {
+        const locationKey = talk.location.toLowerCase().trim();
+        if (!grouped[locationKey]) {
+          grouped[locationKey] = [];
+        }
+        grouped[locationKey].push(talk);
+      }
+    });
+    return grouped;
+  }, [talks]);
+
+  // Merge travels with talks for map display
+  const mapLocations = useMemo(() => {
+    return travels
+      .filter((t) => t.latitude && t.longitude)
+      .map((t) => {
+        const locationKey = `${t.city}, ${t.country}`.toLowerCase().trim();
+        const locationTalks = talksByLocation[locationKey] || [];
+
+        return {
+          city: t.city,
+          country: t.country,
+          latitude: Number(t.latitude),
+          longitude: Number(t.longitude),
+          purpose: t.purpose || undefined,
+          notes: t.notes || undefined,
+          talks: locationTalks.map((talk) => ({
+            title: talk.title,
+            event_name: talk.event_name,
+            date: talk.date || undefined,
+            image_url: talk.image_url || undefined,
+            event_url: talk.event_url || undefined,
+            video_url: talk.video_url || undefined,
+          })),
+        };
+      });
+  }, [travels, talksByLocation]);
+
   return (
-    <div className="section-container">
+    <div className="max-w-7xl mx-auto px-6 py-16">
       <h1 className="page-title">Places</h1>
       <p className="page-subtitle">
         Cities and countries I have travelled to — for conferences, meetups, and
@@ -61,11 +107,11 @@ export default function TravelsPage() {
           {/* Stats */}
           <div className="flex gap-6 mb-8 text-xs font-mono" style={{ color: "var(--text-tertiary)" }}>
             <span>
-              <span style={{ color: "var(--accent)" }}>{uniqueCountries}</span>{" "}
+              <span style={{ color: "var(--accent-green)" }}>{uniqueCountries}</span>{" "}
               countries
             </span>
             <span>
-              <span style={{ color: "var(--accent)" }}>{uniqueCities}</span>{" "}
+              <span style={{ color: "var(--accent-orange)" }}>{uniqueCities}</span>{" "}
               cities
             </span>
             <span>
@@ -77,27 +123,16 @@ export default function TravelsPage() {
           {/* World Map */}
           <div
             className="rounded-lg border overflow-hidden mb-12"
-            style={{ borderColor: "var(--border)", background: "#404040" }}
+            style={{ borderColor: "#ff6b35", background: "linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%)", boxShadow: "0 0 30px rgba(255, 107, 53, 0.2)" }}
           >
             <div className="p-2">
-              <WorldMap
-                locations={travels
-                  .filter((t) => t.latitude && t.longitude)
-                  .map((t) => ({
-                    city: t.city,
-                    country: t.country,
-                    latitude: Number(t.latitude),
-                    longitude: Number(t.longitude),
-                    purpose: t.purpose || undefined,
-                    notes: t.notes || undefined,
-                  }))}
-              />
+              <WorldMap locations={mapLocations} />
             </div>
             <div
               className="px-4 py-2 text-xs font-mono border-t flex justify-between"
-              style={{ borderColor: "var(--border)", color: "var(--text-tertiary)" }}
+              style={{ borderColor: "#ff6b35", color: "#ff6b35" }}
             >
-              <span>hover to explore</span>
+              <span>click pins to see talks & travels</span>
               <span>{uniqueCities} pins</span>
             </div>
           </div>
@@ -133,7 +168,11 @@ export default function TravelsPage() {
                           {t.city}
                         </span>
                         <div className="flex items-center gap-2 flex-1">
-                          {t.purpose && <span className="tag-pill">{t.purpose}</span>}
+                          {t.purpose && (
+                            <span className={t.purpose === 'conference' || t.purpose === 'meetup' ? 'tag-pill-orange' : 'tag-pill'}>
+                              {t.purpose}
+                            </span>
+                          )}
                         </div>
                         {t.notes && (
                           <span className="text-xs truncate max-w-[200px]" style={{ color: "var(--text-tertiary)" }}>

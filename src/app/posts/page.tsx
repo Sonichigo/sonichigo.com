@@ -46,7 +46,7 @@ export default function PostsPage() {
   const paginatedPosts = filtered.slice(startIdx, endIdx);
 
   return (
-    <div className="section-container">
+    <div className="max-w-7xl mx-auto px-6 py-16">
       <h1 className="page-title">Writing</h1>
       <p className="page-subtitle">
         Thoughts, tutorials, and deep-dives into DevOps, cloud-native, testing,
@@ -96,7 +96,7 @@ export default function PostsPage() {
 
       <div className="flex items-center justify-between mb-4">
         <p className="text-xs font-mono" style={{ color: "var(--text-tertiary)" }}>
-          {filtered.length} post{filtered.length !== 1 ? "s" : ""}
+          <span style={{ color: "var(--accent-green)" }}>{filtered.length}</span> post{filtered.length !== 1 ? "s" : ""}
           {filtered.length > POSTS_PER_PAGE && (
             <span className="ml-2">
               (page {currentPage} of {totalPages})
@@ -151,6 +151,9 @@ export default function PostsPage() {
                     style={{ color: "var(--text-primary)" }}
                   >
                     <span className="break-words">{post.title}</span>
+                    {post.is_featured && (
+                      <span className="badge-featured text-[10px]">Featured</span>
+                    )}
                     {isExternal && domain && (
                       <span className="text-xs shrink-0" style={{ color: "var(--text-tertiary)" }}>
                         ↗ {domain}
@@ -159,8 +162,8 @@ export default function PostsPage() {
                   </a>
                   {post.tags && post.tags.length > 0 && (
                     <div className="flex gap-1.5 mt-1.5 flex-wrap">
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="tag-pill">
+                      {post.tags.slice(0, 3).map((tag, idx) => (
+                        <span key={tag} className={idx === 0 ? "tag-pill-green" : "tag-pill"}>
                           {tag}
                         </span>
                       ))}

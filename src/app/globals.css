@@ -12,10 +12,12 @@
     --text-secondary: #525252;
     --text-tertiary: #a3a3a3;
     --border: #e5e5e5;
-    --accent: #3b82f6;
-    --accent-green: #22c55e;
-    --accent-green-dim: #22c55e33;
-    --accent-dim: #3b82f633;
+    --accent: #2563eb;
+    --accent-dim: #2563eb33;
+    --accent-green: #10b981;
+    --accent-green-dim: #10b98133;
+    --accent-orange: #ff6b35;
+    --accent-orange-dim: #ff6b3533;
     --link: #0a0a0a;
     --code-bg: #f5f5f5;
   }
@@ -27,8 +29,12 @@
     --text-secondary: #a3a3a3;
     --text-tertiary: #525252;
     --border: #262626;
-    --accent: #60a5fa;
-    --accent-dim: #60a5fa20;
+    --accent: #3b82f6;
+    --accent-dim: #3b82f630;
+    --accent-green: #10b981;
+    --accent-green-dim: #10b98140;
+    --accent-orange: #ff6b35;
+    --accent-orange-dim: #ff6b3540;
     --link: #e5e5e5;
     --code-bg: #1a1a1a;
   }
@@ -131,6 +137,32 @@
 
   .system-init {
     animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .tag-pill-green {
+    @apply text-xs px-2 py-0.5 rounded-full;
+    background: var(--accent-green-dim);
+    color: var(--accent-green);
+  }
+
+  .tag-pill-orange {
+    @apply text-xs px-2 py-0.5 rounded-full;
+    background: var(--accent-orange-dim);
+    color: var(--accent-orange);
+  }
+
+  .badge-active {
+    @apply text-xs px-2 py-1 rounded-md font-medium;
+    background: var(--accent-green-dim);
+    color: var(--accent-green);
+    border: 1px solid var(--accent-green);
+  }
+
+  .badge-featured {
+    @apply text-xs px-2 py-1 rounded-md font-medium;
+    background: var(--accent-orange-dim);
+    color: var(--accent-orange);
+    border: 1px solid var(--accent-orange);
   }
 }
 

@@ -10,7 +10,7 @@ export default async function AboutPage() {
   const profile = await fetchGitHubProfile();
 
   return (
-    <div className="section-container">
+    <div className="max-w-7xl mx-auto px-6 py-16">
       <h1 className="page-title">About</h1>
       <p className="page-subtitle">A bit about me, what I do, and where to find me.</p>
 
@@ -165,10 +165,10 @@ export default async function AboutPage() {
               </div>
               <div className="flex gap-6 text-xs font-mono" style={{ color: "var(--text-tertiary)" }}>
                 <span>
-                  <span style={{ color: "var(--accent)" }}>{profile.public_repos}</span> repos
+                  <span style={{ color: "var(--accent-green)" }}>{profile.public_repos}</span> repos
                 </span>
                 <span>
-                  <span style={{ color: "var(--accent)" }}>{profile.followers}</span> followers
+                  <span style={{ color: "var(--accent-orange)" }}>{profile.followers}</span> followers
                 </span>
                 <span>
                   <span style={{ color: "var(--accent)" }}>{profile.following}</span> following

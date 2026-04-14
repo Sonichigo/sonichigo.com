@@ -18,7 +18,7 @@ const SOCIALS = [
 export function Footer() {
   return (
     <footer className="border-t mt-20" style={{ borderColor: "var(--border)" }}>
-      <div className="max-w-3xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-6 py-10">
         <div className="flex flex-col sm:flex-row justify-between gap-6">
           <div className="flex gap-6 text-xs font-mono" style={{ color: "var(--text-secondary)" }}>
             {FOOTER_LINKS.map((link) => (

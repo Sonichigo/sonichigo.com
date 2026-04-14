@@ -70,6 +70,8 @@ export async function parseTalksMarkdown(): Promise<Talk[]> {
         event_url: metadata.event_url || null,
         date: metadata.date || null,
         location: metadata.location || null,
+        latitude: metadata.latitude ? parseFloat(metadata.latitude) : null,
+        longitude: metadata.longitude ? parseFloat(metadata.longitude) : null,
         type: (metadata.type as any) || "speaker",
         image_url: metadata.image_url || null,
         video_url: metadata.video_url || null,

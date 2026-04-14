@@ -11,9 +11,11 @@ last_updated: "2026-03-30"
 - **Event:** DevRelKaigi 2025
 - **Date:** 2025-10-04
 - **Location:** Tokyo, Japan
+- **Latitude:** 35.6762
+- **Longitude:** 139.6503
 - **Type:** speaker
 - **Event URL:** [https://devrelkaigi.org/en/speakers/sonichigo](https://devrelkaigi.org/en/speakers/sonichigo)
-- **Image URL:** /images/events/reactplay-meetup-may.jpeg
+- **Image URL:** /assets/img/data/reactplay-meetup-may.jpeg
 
 A session focused on leveraging Azure OpenAI and Next.js to overcome language barriers, enabling more inclusive and globally accessible applications.
 
@@ -24,9 +26,11 @@ A session focused on leveraging Azure OpenAI and Next.js to overcome language ba
 - **Event:** ReactPlay Meetup May
 - **Date:** 2025-05-17
 - **Location:** Bengaluru, India
+- **Latitude:** 12.9716
+- **Longitude:** 77.5946
 - **Type:** speaker
 - **Event URL:** [https://www.meetup.com/reactplay-bengaluru/events/307690438/](https://www.meetup.com/reactplay-bengaluru/events/307690438/)
-- **Image URL:** /images/events/reactplay-meetup-may.jpeg
+- **Image URL:** /assets/img/data/reactplay-meetup-may.jpeg
 
 Explored practical implementation patterns for integrating AI-powered translation and multilingual support in modern web apps.
 
@@ -37,9 +41,11 @@ Explored practical implementation patterns for integrating AI-powered translatio
 - **Event:** CNCG Noida Meetup April
 - **Date:** 2025-04-19
 - **Location:** Noida, India
+- **Latitude:** 28.5355
+- **Longitude:** 77.3910
 - **Type:** speaker
 - **Event URL:** [https://www.linkedin.com/posts/sonichigo_kubeinloop-activity-7320314496596553731](https://www.linkedin.com/posts/sonichigo_kubeinloop-activity-7320314496596553731)
-- **Image URL:** /images/events/cncg-noida-april25.jpeg
+- **Image URL:** /assets/img/data/cncg-noida-april25.jpeg
 
 An introductory session covering the Cloud Native Computing Foundation ecosystem and community initiatives like CNCG.
 
@@ -50,9 +56,11 @@ An introductory session covering the Cloud Native Computing Foundation ecosystem
 - **Event:** React n Roll Meetup April
 - **Date:** 2025-04-12
 - **Location:** Bengaluru, India
+- **Latitude:** 12.9716
+- **Longitude:** 77.5946
 - **Type:** speaker
 - **Event URL:** [https://www.meetup.com/techinsider-bangalore/events/306842947/](https://www.meetup.com/techinsider-bangalore/events/306842947/)
-- **Image URL:** /images/events/reactnroll-april25.jpeg
+- **Image URL:** /assets/img/data/reactnroll-april25.jpeg
 
 Discussed building AI-first frontend applications with seamless multilingual capabilities.
  
@@ -62,9 +70,11 @@ Discussed building AI-first frontend applications with seamless multilingual cap
 - **Event:** CNCF Hooghly March 2025
 - **Date:** 2025-04-08
 - **Location:** Hooghly, India
+- **Latitude:** 22.9068
+- **Longitude:** 88.3882
 - **Type:** speaker
 - **Event URL:** [https://community.cncf.io/events/details/cncf-cloud-native-hooghly-presents-kubekulture/](https://community.cncf.io/events/details/cncf-cloud-native-hooghly-presents-kubekulture/)
-- **Image URL:** /images/events/cncf-hooghly-feb.jpeg
+- **Image URL:** /assets/img/data/cncf-hooghly-feb.jpeg
 
 A deep dive into leveraging eBPF for safe and effective production testing, enhancing observability and debugging.
 
@@ -75,9 +85,11 @@ A deep dive into leveraging eBPF for safe and effective production testing, enha
 - **Event:** CNCF Chennai Feb 2025
 - **Date:** 2025-02-22
 - **Location:** Chennai, India
+- **Latitude:** 13.0827
+- **Longitude:** 80.2707
 - **Type:** speaker
 - **Event URL:** [https://community.cncf.io/events/details/cncf-cloud-native-chennai-presents-cloud-native-chennai-feb-2025-meetup](https://community.cncf.io/events/details/cncf-cloud-native-chennai-presents-cloud-native-chennai-feb-2025-meetup)
-- **Image URL:** /images/events/cncf-chennai-feb-2025.jpeg
+- **Image URL:** /assets/img/data/cncf-chennai-feb-2025.jpeg
 
 Highlighted how DevPod streamlines developer environments and accelerates onboarding and productivity.
 
@@ -88,9 +100,11 @@ Highlighted how DevPod streamlines developer environments and accelerates onboar
 - **Event:** DevRelCon India 2024
 - **Date:** 2024-12-06
 - **Location:** Bengaluru, India
+- **Latitude:** 12.9716
+- **Longitude:** 77.5946
 - **Type:** speaker
 - **Event URL:** [https://blr24.devrelcon.dev/](https://blr24.devrelcon.dev/)
-- **Image URL:** /images/events/devrelcon.jpeg
+- **Image URL:** /assets/img/data/devrelcon.jpeg
 
 Focused on aligning Developer Relations with SEO strategies to drive measurable business impact.
 
@@ -101,10 +115,12 @@ Focused on aligning Developer Relations with SEO strategies to drive measurable 
 - **Event:** Open Source Summit EU 2024
 - **Date:** 2024-09-17
 - **Location:** Vienna, Austria
+- **Latitude:** 48.2082
+- **Longitude:** 16.3738
 - **Type:** speaker
 - **Event URL:** [https://www.youtube.com/watch?v=VoV2eyTiFyY](https://www.youtube.com/watch?v=VoV2eyTiFyY)
 - **Video URL:** [https://www.youtube.com/watch?v=VoV2eyTiFyY](https://www.youtube.com/watch?v=VoV2eyTiFyY)
-- **Image URL:** /images/events/oss-eu-2024.png
+- **Image URL:** /assets/img/data/oss-eu-2024.png
 
 Demonstrated kernel-level testing techniques using eBPF to generate realistic test cases and mocks for microservices.
 
@@ -117,7 +133,7 @@ Demonstrated kernel-level testing techniques using eBPF to generate realistic te
 - **Location:** Virtual
 - **Type:** speaker
 - **Event URL:** [https://apiworld2024.sched.com/event/1kita/](https://apiworld2024.sched.com/event/1kita/)
-- **Image URL:** /images/events/apiworld-2024.png
+- **Image URL:** /assets/img/data/apiworld-2024.png
 
 Explored AI-driven testing workflows using Keploy to accelerate feature delivery cycles.
 
@@ -128,8 +144,11 @@ Explored AI-driven testing workflows using Keploy to accelerate feature delivery
 - **Event:** Platform Meetup July 2024
 - **Date:** 2024-07-09
 - **Location:** Bengaluru, India
+- **Latitude:** 12.9716
+- **Longitude:** 77.5946
 - **Type:** speaker
 - **Event URL:** [https://www.loft.sh/blog/platform-bengaluru-meetup-recap](https://www.loft.sh/blog/platform-bengaluru-meetup-recap)
+- **Image URL:** /assets/img/data/june-platform-24.jpeg
 
 Covered modern microservices development workflows combining DevPod environments and Keploy testing.
 
@@ -143,6 +162,7 @@ Covered modern microservices development workflows combining DevPod environments
 - **Type:** speaker
 - **Event URL:** [https://www.youtube.com/watch?v=1DP6WDTsL8s](https://www.youtube.com/watch?v=1DP6WDTsL8s)
 - **Video URL:** [https://www.youtube.com/watch?v=1DP6WDTsL8s](https://www.youtube.com/watch?v=1DP6WDTsL8s)
+- **Image URL:** /assets/img/data/gssoc-june-24.jpg
 
 An introductory session on improving developer workflows using DevPod in collaborative environments.
 
@@ -153,10 +173,12 @@ An introductory session on improving developer workflows using DevPod in collabo
 - **Event:** DevOpsDays Bangalore 2023
 - **Date:** 2023-12-13
 - **Location:** Bengaluru, India
+- **Latitude:** 12.9716
+- **Longitude:** 77.5946
 - **Type:** speaker
 - **Event URL:** [https://www.youtube.com/watch?v=Q7-fDN3ZOuc](https://www.youtube.com/watch?v=Q7-fDN3ZOuc)
 - **Video URL:** [https://www.youtube.com/watch?v=Q7-fDN3ZOuc](https://www.youtube.com/watch?v=Q7-fDN3ZOuc)
-- **Image URL:** /images/events/devopsdays-23-blr.png
+- **Image URL:** /assets/img/data/devopsdays-23-blr.png
 
 Explained eBPF tracing fundamentals and its applications in observability and debugging.
 
@@ -170,7 +192,7 @@ Explained eBPF tracing fundamentals and its applications in observability and de
 - **Type:** speaker
 - **Event URL:** [https://www.youtube.com/watch?v=SiDQJqRsUDE](https://www.youtube.com/watch?v=SiDQJqRsUDE)
 - **Video URL:** [https://www.youtube.com/watch?v=SiDQJqRsUDE](https://www.youtube.com/watch?v=SiDQJqRsUDE)
-- **Image URL:** /images/events/devseccon-22.jpeg
+- **Image URL:** /assets/img/data/devseccon-22.jpeg
 
 Focused on integrating security practices directly into the software development lifecycle.
 
@@ -178,6 +200,8 @@ Focused on integrating security practices directly into the software development
 - **Event:** PuneFOSS 2023
 - **Date:** 2023-04-01
 - **Location:** Pune, India
+- **Latitude:** 18.5204
+- **Longitude:** 73.8567
 - **Type:** speaker
 - **Image URL:** https://pbs.twimg.com/media/FsE6PWFagAIn8ho?format=jpg&name=medium
 
@@ -187,6 +211,8 @@ Demonstrated how to leverage production traffic to generate realistic test cases
 - **Event:** FOSS Kolkata 2023
 - **Date:** 2023-02-27
 - **Location:** Kolkata, India
+- **Latitude:** 22.5726
+- **Longitude:** 88.3639
 - **Type:** speaker
 - **Image URL:** https://pbs.twimg.com/media/FpyxG96XoAEgGH3?format=jpg&name=medium
 
