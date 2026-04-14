@@ -17,13 +17,13 @@ export function ThemeToggle() {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
       style={{
-        background: "var(--accent-dim)",
-        border: "1px solid var(--accent)",
+        background: isDark ? "var(--accent-orange-dim)" : "var(--accent-dim)",
+        border: isDark ? "1px solid var(--accent-orange)" : "1px solid var(--accent)",
       }}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       title={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
-      <span className="text-lg font-mono transition-transform duration-300" style={{ color: "var(--accent)" }}>
+      <span className="text-lg font-mono transition-transform duration-300" style={{ color: isDark ? "var(--accent-orange)" : "var(--accent)" }}>
         {isDark ? "☀" : "☾"}
       </span>
     </button>

@@ -24,9 +24,7 @@ export default function HomeContent({
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [repos, setRepos] = useState<GitHubRepo[]>(initialRepos);
   const [profile, setProfile] = useState<any>(initialProfile);
-  const [avatarUrl, setAvatarUrl] = useState<string>(
-    initialProfile?.avatar_url || "/profile.png"
-  );
+  const [avatarUrl, setAvatarUrl] = useState<string>("/profile.png");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -50,10 +48,10 @@ export default function HomeContent({
         if (cachedRepos.length > 0) setRepos(cachedRepos);
         if (cachedProfile) setProfile(cachedProfile);
 
-        // Handle avatar with fallback
+        // Handle avatar with fallback: local primary, GitHub as fallback
         const finalAvatarUrl = await preloadImageWithFallback(
-          cachedProfile?.avatar_url,
-          "/profile.png"
+          "/profile.png",
+          cachedProfile?.avatar_url || "/profile.png"
         );
         if (mounted) setAvatarUrl(finalAvatarUrl);
 

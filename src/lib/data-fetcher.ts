@@ -138,16 +138,15 @@ export async function saveToMarkdownBackup(
 
 /**
  * Get avatar URL with fallback logic
- * 1. Try local public image
+ * 1. Try local public image first
  * 2. Fallback to GitHub avatar
  */
 export function getAvatarUrl(githubProfile: any | null): string {
-  const localAvatar = "/images/header-image/Animesh-vienna.jpg";
+  const localAvatar = "/profile.png";
   const githubAvatar = githubProfile?.avatar_url;
 
-  // Check if local image exists by trying to fetch it
-  // In production, you might want to handle this differently
-  return githubAvatar || localAvatar;
+  // Local avatar is primary, GitHub is fallback
+  return localAvatar;
 }
 
 /**
@@ -159,13 +158,29 @@ export function preloadImageWithFallback(
 ): Promise<string> {
   return new Promise((resolve) => {
     if (!primaryUrl) {
+      console.log("No primary URL provided, using fallback:", fallbackUrl);
       resolve(fallbackUrl);
       return;
     }
 
     const img = new Image();
-    img.onload = () => resolve(primaryUrl);
-    img.onerror = () => resolve(fallbackUrl);
+    img.onload = () => {
+      console.log("Successfully loaded primary image:", primaryUrl);
+      resolve(primaryUrl);
+    };
+    img.onerror = () => {
+      console.warn("Failed to load primary image, using fallback:", primaryUrl);
+      resolve(fallbackUrl);
+    };
+
+    // Set a timeout to fallback after 5 seconds
+    setTimeout(() => {
+      if (img.complete === false) {
+        console.warn("Image loading timed out, using fallback");
+        resolve(fallbackUrl);
+      }
+    }, 5000);
+
     img.src = primaryUrl;
   });
 }
