@@ -10,7 +10,7 @@ const FOOTER_LINKS = [
 const SOCIALS = [
   { href: "https://github.com/sonichigo", label: "GitHub" },
   { href: "https://linkedin.com/in/sonichigo", label: "LinkedIn" },
-  { href: "https://x.com/sonichigo1219", label: "X" },
+  { href: "https://x.com/sonichigo", label: "X" },
   { href: "https://sonichigo.hashnode.dev", label: "Blog" },
   { href: "https://www.credly.com/users/sonichigo", label: "Credly" },
 ];

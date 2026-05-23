@@ -1,4 +1,5 @@
 import type { GitHubRepo } from "./types";
+import { fetchWithRetry } from "./fetch-config";
 
 const GITHUB_USERNAME = "Sonichigo";
 
@@ -12,7 +13,7 @@ export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
       headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
     }
 
-    const res = await fetch(
+    const res = await fetchWithRetry(
       `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12&type=owner`,
       { headers, next: { revalidate: 3600 } }
     );
@@ -46,7 +47,7 @@ export async function fetchGitHubProfile() {
       headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
     }
 
-    const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
+    const res = await fetchWithRetry(`https://api.github.com/users/${GITHUB_USERNAME}`, {
       headers,
       next: { revalidate: 3600 },
     });

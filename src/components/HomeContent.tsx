@@ -2,41 +2,32 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import type { Post, GitHubRepo } from "@/lib/types";
+import type { GitHubRepo } from "@/lib/types";
 import {
-  fetchPostsCached,
   fetchReposCached,
   fetchProfileCached,
   preloadImageWithFallback,
 } from "@/lib/data-fetcher";
 
 interface HomeContentProps {
-  initialPosts: Post[];
   initialRepos: GitHubRepo[];
   initialProfile: any;
 }
 
 export default function HomeContent({
-  initialPosts,
   initialRepos,
   initialProfile,
 }: HomeContentProps) {
-  const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [repos, setRepos] = useState<GitHubRepo[]>(initialRepos);
-  const [profile, setProfile] = useState<any>(initialProfile);
   const [avatarUrl, setAvatarUrl] = useState<string>("/profile.png");
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
     async function loadData() {
-      setIsLoading(true);
-
       try {
         // Load from IndexedDB cache
-        const [cachedPosts, cachedRepos, cachedProfile] = await Promise.all([
-          fetchPostsCached(),
+        const [cachedRepos, cachedProfile] = await Promise.all([
           fetchReposCached(),
           fetchProfileCached(),
         ]);
@@ -44,9 +35,7 @@ export default function HomeContent({
         if (!mounted) return;
 
         // Update state with cached data
-        if (cachedPosts.length > 0) setPosts(cachedPosts);
         if (cachedRepos.length > 0) setRepos(cachedRepos);
-        if (cachedProfile) setProfile(cachedProfile);
 
         // Handle avatar with fallback: local primary, GitHub as fallback
         const finalAvatarUrl = await preloadImageWithFallback(
@@ -54,14 +43,9 @@ export default function HomeContent({
           cachedProfile?.avatar_url || "/profile.png"
         );
         if (mounted) setAvatarUrl(finalAvatarUrl);
-
-        // Note: Markdown backups are saved via /api/backup endpoint
-        // This happens automatically when data is cached
       } catch (error) {
         console.error("Error loading cached data:", error);
         // Keep using initial server-rendered data on error
-      } finally {
-        if (mounted) setIsLoading(false);
       }
     }
 
@@ -72,7 +56,6 @@ export default function HomeContent({
     };
   }, []);
 
-  const displayPosts = posts.slice(0, 6);
   const displayRepos = repos.slice(0, 4);
 
   return (
@@ -225,87 +208,17 @@ export default function HomeContent({
             About Me
           </Link>
           <Link
-            href="/posts"
+            href="/talks"
             className="px-4 py-2 rounded-md border transition-colors"
             style={{
               borderColor: "var(--border)",
               color: "var(--text-primary)",
             }}
           >
-            Read Latest Posts
+            View Sessions & Talks
           </Link>
         </div>
       </section>
-
-      {/* Featured Writing */}
-      {displayPosts.length > 0 && (
-        <section className="pb-16">
-          <h2
-            className="text-xs uppercase tracking-[0.2em] mb-6"
-            style={{ color: "var(--text-tertiary)" }}
-          >
-            // featured writing
-          </h2>
-
-          <ul className="space-y-0">
-            {displayPosts.map((post, i) => {
-              const isExternal = !post.url.includes("sonichigo.hashnode.dev");
-              const domain = isExternal
-                ? new URL(post.url).hostname.replace("www.", "")
-                : null;
-
-              return (
-                <li
-                  key={post.url}
-                  className="group border-t py-3 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4"
-                  style={{
-                    borderColor: "var(--border)",
-                    animationDelay: `${i * 80}ms`,
-                  }}
-                >
-                  <span className="mono-date shrink-0 w-28">
-                    {post.published_at
-                      ? new Date(post.published_at + "T00:00:00").toLocaleDateString(
-                          "en-US",
-                          {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          }
-                        )
-                      : ""}
-                  </span>
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm group-hover:underline underline-offset-4 transition-colors flex items-baseline gap-1"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    {post.title}
-                    {isExternal && (
-                      <span
-                        className="text-xs shrink-0"
-                        style={{ color: "var(--text-tertiary)" }}
-                      >
-                        ↗ {domain}
-                      </span>
-                    )}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-
-          <Link
-            href="/posts"
-            className="inline-block mt-6 text-xs uppercase tracking-[0.2em] hover:underline underline-offset-4"
-            style={{ color: "var(--accent)" }}
-          >
-            View all posts
-          </Link>
-        </section>
-      )}
 
       {/* GitHub Repos */}
       {displayRepos.length > 0 && (

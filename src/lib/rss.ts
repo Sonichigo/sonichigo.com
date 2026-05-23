@@ -1,4 +1,5 @@
 import type { Post } from "./types";
+import { fetchWithRetry } from "./fetch-config";
 
 interface RssFeedSource {
   name: string;
@@ -93,10 +94,9 @@ async function fetchRssFeed(source: RssFeedSource): Promise<Post[]> {
 
   for (const feedUrl of urlsToTry) {
     try {
-      const res = await fetch(feedUrl, {
+      const res = await fetchWithRetry(feedUrl, {
         next: { revalidate: 3600 },
         headers: {
-          "User-Agent": "Mozilla/5.0 (compatible; sonichigo-portfolio/1.0)",
           Accept: "application/rss+xml, application/xml, text/xml, */*",
         },
       });
@@ -137,9 +137,11 @@ async function fetchRssFeed(source: RssFeedSource): Promise<Post[]> {
 // ── Hashnode GraphQL API fallback ──
 async function fetchHashnodePosts(): Promise<Post[]> {
   try {
-    const res = await fetch("https://gql.hashnode.com", {
+    const res = await fetchWithRetry("https://gql.hashnode.com", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       next: { revalidate: 3600 },
       body: JSON.stringify({
         query: `{
@@ -175,9 +177,11 @@ async function fetchHashnodePosts(): Promise<Post[]> {
 // ── Scrape single page of Keploy author page ──
 async function scrapeAuthorPageSingle(url: string): Promise<Post[]> {
   try {
-    const res = await fetch(url, {
+    const res = await fetchWithRetry(url, {
       next: { revalidate: 3600 },
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; sonichigo-portfolio/1.0)" },
+      headers: {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      },
     });
     if (!res.ok) return [];
 

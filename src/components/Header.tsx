@@ -92,7 +92,7 @@ export function Header() {
               </svg>
             </a>
             <a
-              href="https://x.com/sonichigo1219"
+              href="https://x.com/sonichigo"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110"
@@ -168,7 +168,7 @@ export function Header() {
               </svg>
             </a>
             <a
-              href="https://x.com/sonichigo1219"
+              href="https://x.com/sonichigo"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200"

@@ -58,30 +58,35 @@ export async function fetchReposCached(): Promise<GitHubRepo[]> {
     "github_repos",
     STORES.REPOS,
     async () => {
-      const headers: HeadersInit = {
-        Accept: "application/vnd.github.v3+json",
-        "User-Agent": "sonichigo-portfolio",
-      };
+      try {
+        const headers: HeadersInit = {
+          Accept: "application/vnd.github.v3+json",
+          "User-Agent": "sonichigo-portfolio",
+        };
 
-      const res = await fetch(
-        `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12&type=owner`,
-        { headers }
-      );
+        const res = await fetch(
+          `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12&type=owner`,
+          { headers }
+        );
 
-      if (!res.ok) return [];
+        if (!res.ok) return [];
 
-      const data = await res.json();
+        const data = await res.json();
 
-      return data
-        .filter((repo: any) => !repo.fork && !repo.archived)
-        .map((repo: any) => ({
-          name: repo.name,
-          description: repo.description,
-          url: repo.html_url,
-          stars: repo.stargazers_count,
-          language: repo.language,
-          updated_at: repo.updated_at,
-        }));
+        return data
+          .filter((repo: any) => !repo.fork && !repo.archived)
+          .map((repo: any) => ({
+            name: repo.name,
+            description: repo.description,
+            url: repo.html_url,
+            stars: repo.stargazers_count,
+            language: repo.language,
+            updated_at: repo.updated_at,
+          }));
+      } catch (error) {
+        console.error("Failed to fetch GitHub repos (using cache/initial data):", error);
+        return [];
+      }
     }
   );
 }
@@ -94,18 +99,23 @@ export async function fetchProfileCached(): Promise<any> {
     "github_profile",
     STORES.PROFILE,
     async () => {
-      const headers: HeadersInit = {
-        Accept: "application/vnd.github.v3+json",
-        "User-Agent": "sonichigo-portfolio",
-      };
+      try {
+        const headers: HeadersInit = {
+          Accept: "application/vnd.github.v3+json",
+          "User-Agent": "sonichigo-portfolio",
+        };
 
-      const res = await fetch(
-        `https://api.github.com/users/${GITHUB_USERNAME}`,
-        { headers }
-      );
+        const res = await fetch(
+          `https://api.github.com/users/${GITHUB_USERNAME}`,
+          { headers }
+        );
 
-      if (!res.ok) return null;
-      return res.json();
+        if (!res.ok) return null;
+        return res.json();
+      } catch (error) {
+        console.error("Failed to fetch GitHub profile (using cache/fallback):", error);
+        return null;
+      }
     }
   );
 }

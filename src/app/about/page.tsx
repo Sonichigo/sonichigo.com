@@ -113,7 +113,7 @@ export default async function AboutPage() {
             {[
               { label: "GitHub", url: "https://github.com/sonichigo", handle: "@sonichigo" },
               { label: "LinkedIn", url: "https://linkedin.com/in/sonichigo", handle: "in/sonichigo" },
-              { label: "X / Twitter", url: "https://x.com/sonichigo1219", handle: "@sonichigo1219" },
+              { label: "X / Twitter", url: "https://x.com/sonichigo", handle: "@sonichigo1219" },
               { label: "Blog", url: "https://sonichigo.hashnode.dev", handle: "sonichigo.hashnode.dev" },
               { label: "Credly", url: "https://www.credly.com/users/sonichigo", handle: "Certifications & Badges" },
               { label: "Sponsor", url: "https://github.com/sponsors/sonichigo", handle: "Buy me a coffee" },

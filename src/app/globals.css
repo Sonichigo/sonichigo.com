@@ -187,6 +187,112 @@
   }
 }
 
+/* Markdown Prose Styles */
+.prose {
+  @apply leading-relaxed;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply font-bold mt-8 mb-4;
+  color: var(--text-primary);
+}
+
+.prose h1 {
+  @apply text-3xl;
+}
+
+.prose h2 {
+  @apply text-2xl;
+}
+
+.prose h3 {
+  @apply text-xl;
+}
+
+.prose p {
+  @apply mb-4;
+  color: var(--text-secondary);
+}
+
+.prose a {
+  color: var(--accent);
+  @apply underline underline-offset-4;
+}
+
+.prose ul,
+.prose ol {
+  @apply mb-4 pl-6;
+  color: var(--text-secondary);
+}
+
+.prose ul {
+  @apply list-disc;
+}
+
+.prose ol {
+  @apply list-decimal;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+.prose code {
+  @apply px-1.5 py-0.5 rounded text-sm font-mono;
+  background: var(--code-bg);
+  color: var(--accent);
+}
+
+.prose pre {
+  @apply p-4 rounded-lg overflow-x-auto mb-4;
+  background: var(--bg-secondary);
+}
+
+.prose pre code {
+  @apply p-0 bg-transparent;
+  color: var(--text-primary);
+}
+
+.prose blockquote {
+  @apply border-l-4 pl-4 italic mb-4;
+  border-color: var(--accent);
+  color: var(--text-secondary);
+}
+
+.prose img {
+  @apply rounded-lg my-6;
+}
+
+.prose hr {
+  @apply my-8 border-0 h-px;
+  background: var(--border);
+}
+
+.prose table {
+  @apply w-full mb-4;
+}
+
+.prose th,
+.prose td {
+  @apply border px-4 py-2;
+  border-color: var(--border);
+}
+
+.prose th {
+  @apply font-bold;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.prose td {
+  color: var(--text-secondary);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

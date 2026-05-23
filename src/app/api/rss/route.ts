@@ -1,3 +1,4 @@
+import "@/lib/init"; // Initialize app configuration
 import { NextResponse } from "next/server";
 import { fetchAllPosts } from "@/lib/rss";
 
