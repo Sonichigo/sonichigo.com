@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "backup:list": "curl http://localhost:3000/api/backup | json_pp"
+    "backup:list": "curl http://localhost:3000/api/backup | json_pp",
+    "test:og": "open http://localhost:3000/api/og?title=Test%20Post&subtitle=This%20is%20a%20test%20description&type=post"
   },
   "keywords": [],
   "author": "",
