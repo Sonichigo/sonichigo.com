@@ -16,6 +16,7 @@ out/
 *.md
 !README.md
 !data/*.md
+!data/posts/*.md
 
 # Lock files
 package-lock.json
