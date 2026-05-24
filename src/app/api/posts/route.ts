@@ -6,7 +6,7 @@ import path from "path";
 import matter from "gray-matter";
 
 export const revalidate = 3600; // Cache for 1 hour
-export const dynamic = "force-static"; // Force static generation when possible
+export const dynamic = "force-dynamic"; // Always fetch fresh data from external sources
 
 async function getLocalPosts() {
   try {

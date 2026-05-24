@@ -42,6 +42,9 @@ const BLOCKED_URLS = new Set([
   "https://keploy.io/blog/community",
   "https://keploy.io/blog/technology/",
   "https://keploy.io/blog/community/",
+  "https://keploy.io/blog/community/impact-of-gpt-03-mini-on-tech",
+  "https://keploy.io/blog/community/how-vps-architecture-solves-the-problem",
+
 ]);
 
 const AUTHOR_NAMES = ["animesh", "sonichigo", "animesh pathak"];
@@ -187,12 +190,27 @@ async function scrapeHarnessAuthorPage(url: string): Promise<Post[]> {
     const posts: Post[] = [];
     const seen = new Set<string>();
 
+    // First, extract all <time datetime="..."> tags with their positions
+    const timeMap = new Map<number, string>(); // position -> ISO date
+    const timeRegex = /<time[^>]+datetime=["']([^"']+)["']/gi;
+    let timeMatch;
+    while ((timeMatch = timeRegex.exec(html)) !== null) {
+      const dateStr = timeMatch[1];
+      try {
+        const d = new Date(dateStr);
+        if (!isNaN(d.getTime())) {
+          timeMap.set(timeMatch.index, d.toISOString().split("T")[0]);
+        }
+      } catch { /* ignore */ }
+    }
+
     // Extract all /blog/ URLs
     const urlPattern = /href="(\/blog\/[a-z0-9-]+)"/gi;
     let match;
 
     while ((match = urlPattern.exec(html)) !== null) {
       const href = match[1];
+      const linkPos = match.index;
 
       // Skip navigation links
       if (href === '/blog' || href.includes('#') || href.length < 15) continue;
@@ -202,12 +220,23 @@ async function scrapeHarnessAuthorPage(url: string): Promise<Post[]> {
       if (seen.has(fullUrl)) continue;
       seen.add(fullUrl);
 
+      // Find the closest <time> tag (within 3000 chars before or after this link)
+      let publishedAt = "";
+      let closestDistance = Infinity;
+      for (const [timePos, date] of timeMap) {
+        const distance = Math.abs(timePos - linkPos);
+        if (distance < 3000 && distance < closestDistance) {
+          closestDistance = distance;
+          publishedAt = date;
+        }
+      }
+
       posts.push({
         id: posts.length,
         title: href.split('/').pop()?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Untitled',
         url: fullUrl,
         source: "harness",
-        published_at: "", // Will be filled from RSS or individual pages
+        published_at: publishedAt,
         excerpt: "",
         tags: ["database", "devops"],
         image_url: null,
@@ -446,13 +475,69 @@ export async function fetchAllPosts(): Promise<Post[]> {
         posts = await fetchHashnodePosts();
       }
     } else if (source.sourceLabel === "harness") {
-      // Harness: scrape author page (Webflow site, no usable RSS author field)
+      // Harness: scrape author page + enrich with RSS dates
       if (source.authorPageUrl) {
+        // Step 1: Scrape author page for URLs
         posts = await scrapeHarnessAuthorPage(source.authorPageUrl);
         if (posts.length === 0) {
           console.log("Harness scraping failed, using static fallback");
           posts = [...HARNESS_POSTS];
         } else {
+          // Step 2: Fetch RSS feed to get dates and titles for scraped URLs
+          try {
+            const rssRes = await fetchWithRetry(source.url, {
+              next: { revalidate: 3600 },
+              headers: { Accept: "application/rss+xml, application/xml, text/xml, */*" },
+            });
+            if (rssRes.ok) {
+              const xml = await rssRes.text();
+              const rssItems = parseRssXml(xml);
+
+              // Create a map of URL -> RSS item
+              const rssMap = new Map(
+                rssItems.map((item) => [
+                  (item.link || "").toLowerCase().replace(/\/$/, ""),
+                  item
+                ])
+              );
+
+              // Create map from static fallback posts too
+              const fallbackMap = new Map(
+                HARNESS_POSTS.map((p) => [p.url.toLowerCase().replace(/\/$/, ""), p])
+              );
+
+              // Enrich scraped posts with RSS data, then fallback data
+              posts = posts.map((post) => {
+                const normalized = post.url.toLowerCase().replace(/\/$/, "");
+                const rssItem = rssMap.get(normalized);
+                const fallback = fallbackMap.get(normalized);
+
+                if (rssItem) {
+                  return {
+                    ...post,
+                    title: rssItem.title || post.title,
+                    published_at: rssItem.pubDate ? new Date(rssItem.pubDate).toISOString().split("T")[0] : post.published_at,
+                    excerpt: truncate(rssItem.contentSnippet || stripHtml(rssItem.content || ""), 200) || post.excerpt,
+                  };
+                } else if (fallback) {
+                  return {
+                    ...post,
+                    title: fallback.title || post.title,
+                    published_at: fallback.published_at || post.published_at,
+                    excerpt: fallback.excerpt || post.excerpt,
+                  };
+                }
+                // For posts not in RSS or fallback, use a placeholder date (2025 range)
+                if (!post.published_at) {
+                  return { ...post, published_at: "2025-01-01" };
+                }
+                return post;
+              });
+            }
+          } catch (err) {
+            console.error("Failed to fetch Harness RSS for date enrichment:", err);
+          }
+
           console.log(`✓ Scraped ${posts.length} posts from Harness`);
         }
       } else {
