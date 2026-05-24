@@ -32,6 +32,7 @@ const RSS_SOURCES: RssFeedSource[] = [
     name: "Harness",
     url: "https://www.harness.io/blog/rss.xml",
     sourceLabel: "harness",
+    authorPageUrl: "https://www.harness.io/authors/animesh-pathak",
   },
 ];
 
@@ -41,14 +42,12 @@ const BLOCKED_URLS = new Set([
   "https://keploy.io/blog/community",
   "https://keploy.io/blog/technology/",
   "https://keploy.io/blog/community/",
-  "https://keploy.io/blog/community/building-reliable-ai-writing-tools-lessons-from-developing-textero",
-  "https://keploy.io/blog/community/how-vps-architecture-solves-the-problem",
 ]);
 
 const AUTHOR_NAMES = ["animesh", "sonichigo", "animesh pathak"];
 
 // Maximum pages to scrape from Keploy author page
-const KEPLOY_MAX_PAGES = 10; // Adjust if you have more than 50 posts (10 per page)
+const KEPLOY_MAX_PAGES = 20; // Increased to capture all posts (~10 posts per page)
 
 // Harness: static fallback (Webflow site, can't scrape or filter RSS by author)
 const HARNESS_POSTS: Post[] = [
@@ -174,6 +173,55 @@ async function fetchHashnodePosts(): Promise<Post[]> {
   }
 }
 
+// ── Scrape Harness author page ──
+async function scrapeHarnessAuthorPage(url: string): Promise<Post[]> {
+  try {
+    const res = await fetchWithRetry(url, {
+      headers: {
+        "Accept": "text/html",
+      },
+    });
+    if (!res.ok) return [];
+
+    const html = await res.text();
+    const posts: Post[] = [];
+    const seen = new Set<string>();
+
+    // Extract all /blog/ URLs
+    const urlPattern = /href="(\/blog\/[a-z0-9-]+)"/gi;
+    let match;
+
+    while ((match = urlPattern.exec(html)) !== null) {
+      const href = match[1];
+
+      // Skip navigation links
+      if (href === '/blog' || href.includes('#') || href.length < 15) continue;
+
+      const fullUrl = `https://www.harness.io${href}`;
+
+      if (seen.has(fullUrl)) continue;
+      seen.add(fullUrl);
+
+      posts.push({
+        id: posts.length,
+        title: href.split('/').pop()?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Untitled',
+        url: fullUrl,
+        source: "harness",
+        published_at: "", // Will be filled from RSS or individual pages
+        excerpt: "",
+        tags: ["database", "devops"],
+        image_url: null,
+        is_featured: false,
+      });
+    }
+
+    return posts;
+  } catch (err) {
+    console.error(`Failed to scrape Harness author page:`, err);
+    return [];
+  }
+}
+
 // ── Scrape single page of Keploy author page ──
 async function scrapeAuthorPageSingle(url: string): Promise<Post[]> {
   try {
@@ -268,6 +316,7 @@ async function scrapeAuthorPage(source: RssFeedSource): Promise<Post[]> {
   if (!source.authorPageUrl) return [];
 
   const allPosts: Post[] = [];
+  const seenUrls = new Set<string>();
   const maxPages = source.sourceLabel === "keploy" ? KEPLOY_MAX_PAGES : 1;
 
   for (let page = 1; page <= maxPages; page++) {
@@ -276,14 +325,32 @@ async function scrapeAuthorPage(source: RssFeedSource): Promise<Post[]> {
 
     if (pagePosts.length === 0) {
       // No more posts on this page, stop pagination
+      console.log(`  Page ${page}: No posts found, stopping pagination`);
       break;
     }
 
-    allPosts.push(...pagePosts);
+    // Dedupe within scraping itself
+    let newPosts = 0;
+    for (const post of pagePosts) {
+      const normalized = post.url.toLowerCase().replace(/\/$/, '');
+      if (!seenUrls.has(normalized)) {
+        seenUrls.add(normalized);
+        allPosts.push(post);
+        newPosts++;
+      }
+    }
+
+    console.log(`  Page ${page}: Found ${pagePosts.length} posts, ${newPosts} new`);
+
+    // If we got fewer than 8 new posts, we've probably exhausted the author's posts
+    if (newPosts < 3) {
+      console.log(`  Stopping pagination: only ${newPosts} new posts on page ${page}`);
+      break;
+    }
   }
 
   if (allPosts.length > 0) {
-    console.log(`✓ Scraped ${allPosts.length} posts from ${source.name} (${Math.ceil(allPosts.length / 10)} pages)`);
+    console.log(`✓ Scraped ${allPosts.length} unique posts from ${source.name}`);
   }
 
   return allPosts;
@@ -379,8 +446,18 @@ export async function fetchAllPosts(): Promise<Post[]> {
         posts = await fetchHashnodePosts();
       }
     } else if (source.sourceLabel === "harness") {
-      // Harness: static list (Webflow site, no usable RSS author field)
-      posts = [...HARNESS_POSTS];
+      // Harness: scrape author page (Webflow site, no usable RSS author field)
+      if (source.authorPageUrl) {
+        posts = await scrapeHarnessAuthorPage(source.authorPageUrl);
+        if (posts.length === 0) {
+          console.log("Harness scraping failed, using static fallback");
+          posts = [...HARNESS_POSTS];
+        } else {
+          console.log(`✓ Scraped ${posts.length} posts from Harness`);
+        }
+      } else {
+        posts = [...HARNESS_POSTS];
+      }
     } else if (source.sourceLabel === "keploy") {
       // Keploy: scrape author page with pagination (gets all posts!)
       posts = await scrapeAuthorPage(source);
@@ -402,7 +479,13 @@ export async function fetchAllPosts(): Promise<Post[]> {
   });
 
   // Remove blocked URLs (e.g. Keploy category pages)
+  const blocked = unique.filter((post) => BLOCKED_URLS.has(post.url));
+  if (blocked.length > 0) {
+    console.log(`⚠️  Blocked ${blocked.length} URLs:`, blocked.map(p => p.url));
+  }
   const cleaned = unique.filter((post) => !BLOCKED_URLS.has(post.url));
+
+  console.log(`📊 Stats: ${allPosts.length} total → ${unique.length} after dedup → ${cleaned.length} after blocking`);
 
   // Sort by date descending (latest first)
   cleaned.sort((a, b) => {
