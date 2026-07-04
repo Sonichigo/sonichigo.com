@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap");
 
 @layer base {
   :root {
@@ -26,7 +26,7 @@
     --bg: #0a0a0a;
     --bg-secondary: #141414;
     --text-primary: #e5e5e5;
-    --text-secondary: #a3a3a3;
+    --text-secondary: #e5e5e5;
     --text-tertiary: #525252;
     --border: #262626;
     --accent: #3b82f6;
@@ -44,10 +44,18 @@
   }
 
   body {
-    @apply font-mono;
+    @apply font-sans;
     background-color: var(--bg);
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  code, pre, kbd, samp {
+    @apply font-mono;
   }
 
   ::selection {

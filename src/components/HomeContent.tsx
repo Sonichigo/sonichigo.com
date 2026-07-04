@@ -16,7 +16,7 @@ interface HomeContentProps {
 
 export default function HomeContent({
   initialRepos,
-  initialProfile,
+  initialProfile: _initialProfile,
 }: HomeContentProps) {
   const [repos, setRepos] = useState<GitHubRepo[]>(initialRepos);
   const [avatarUrl, setAvatarUrl] = useState<string>("/profile.png");
@@ -64,79 +64,82 @@ export default function HomeContent({
       <section className="pt-8 pb-16">
         <div className="flex flex-col-reverse sm:flex-row sm:items-start sm:justify-between gap-8 mb-8">
           {/* Left — text */}
-          <div className="flex-1">
-            <p
-              className="text-xs mb-4 tracking-widest"
-              style={{ color: "var(--text-tertiary)" }}
-            >
-              01100100 01100101 01110110 01110010 01100101 01101100
-            </p>
-            <br />
-            <p
-              className="text-xs uppercase tracking-[0.3em] mb-4 system-init"
-              style={{ color: "var(--accent-green)" }}
-            >
-              :: system.init() ::
-            </p>
-            <br />
-            <div
-              className="text-xs mb-6 tracking-wider"
-              style={{ color: "var(--text-tertiary)" }}
-            >
-              [ DevRel · OSS · eBPF · Cloud Native · Writer ]
+          <div className="flex-1 flex flex-col justify-between">
+            <div>
+              <p
+                className="text-xs mb-4 tracking-widest"
+                style={{ color: "var(--text-tertiary)" }}
+              >
+                01100100 01100101 01110110 01110010 01100101 01101100
+              </p>
+              <br />
+              <p
+                className="text-xs uppercase tracking-[0.3em] mb-4 system-init"
+                style={{ color: "var(--accent-green)" }}
+              >
+                :: system.init() ::
+              </p>
+              <br />
+              <div
+                className="text-xs mb-8 tracking-wider"
+                style={{ color: "var(--accent)" }}
+              >
+                [ DevRel · OSS · eBPF · Cloud Native · Writer ]
+              </div>
+            </div>
+
+            <div>
+              <h1
+                className="text-xl sm:text-xl font-normal leading-relaxed mb-6"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Developer Relations Engineer at{" "}
+                <a
+                  href="https://harness.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-4 decoration-[var(--accent)] decoration-1"
+                >
+                  Harness
+                </a>
+                , working at the intersection of database DevOps, APIs, testing,
+                and open-source innovation.
+              </h1>
+
+              <p
+                className="text-sm leading-relaxed mb-8"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                I help developers and communities understand modern tooling
+                through hands-on demos, real-world architecture, and clear
+                storytelling. I turn complex systems into practical, usable
+                knowledge — from eBPF tracing to CI/CD pipelines.
+              </p>
             </div>
           </div>
 
           {/* Right — profile picture */}
-          <div className="shrink-0">
+          <div className="shrink-0 self-start">
             <div
-              className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden"
+              className="relative w-40 h-48 sm:w-56 sm:h-64 lg:w-64 lg:h-80 rounded-xl overflow-hidden"
               style={{
                 border: "2px solid var(--accent)",
-                boxShadow: "0 0 20px var(--accent-dim)",
+                boxShadow: "0 0 32px var(--accent-dim)",
               }}
             >
               <img
                 src={avatarUrl}
                 alt="Animesh Pathak"
-                width={128}
-                height={128}
-                className="w-full h-full object-cover"
+                width={256}
+                height={320}
+                className="w-full h-full object-cover object-top"
                 onError={(e) => {
-                  // Final fallback if both fail
                   (e.target as HTMLImageElement).src = "/profile.png";
                 }}
               />
             </div>
           </div>
         </div>
-
-        <h1
-          className="text-xl sm:text-xl font-normal leading-relaxed mb-6"
-          style={{ color: "var(--text-primary)" }}
-        >
-          Developer Relations Engineer at{" "}
-          <a
-            href="https://harness.io"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline underline-offset-4 decoration-[var(--accent)] decoration-1"
-          >
-            Harness
-          </a>
-          , working at the intersection of database DevOps, APIs, testing, and
-          open-source innovation.
-        </h1>
-
-        <p
-          className="text-sm leading-relaxed max-w-2xl mb-8"
-          style={{ color: "var(--text-secondary)" }}
-        >
-          I help developers and communities understand modern tooling through
-          hands-on demos, real-world architecture, and clear storytelling. I
-          turn complex systems into practical, usable knowledge — from eBPF
-          tracing to CI/CD pipelines.
-        </p>
 
         {/* Badges / Credentials */}
         <div className="flex flex-wrap gap-3 mb-8">

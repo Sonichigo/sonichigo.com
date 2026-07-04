@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import type { Post } from "@/lib/types";
 
 const POSTS_PER_PAGE = 20;
@@ -119,13 +120,29 @@ export default function PostsPage() {
         <>
           <ul className="space-y-0">
             {paginatedPosts.map((post, i) => {
-            const isExternal = !post.url.includes("sonichigo.hashnode.dev");
-            const domain = isExternal
+            const isLocal = post.source === "sonichigo.com";
+            const domain = !isLocal
               ? (() => {
                   try { return new URL(post.url).hostname.replace("www.", ""); }
                   catch { return ""; }
                 })()
               : null;
+
+            const linkClass = "text-sm group-hover:underline underline-offset-4 transition-colors inline-flex items-baseline gap-1.5 flex-wrap";
+            const linkStyle = { color: "var(--text-primary)" };
+            const linkInner = (
+              <>
+                <span className="break-words">{post.title}</span>
+                {post.is_featured && (
+                  <span className="badge-featured text-[10px]">Featured</span>
+                )}
+                {!isLocal && domain && (
+                  <span className="text-xs shrink-0" style={{ color: "var(--text-tertiary)" }}>
+                    ↗ {domain}
+                  </span>
+                )}
+              </>
+            );
 
             return (
               <li
@@ -143,23 +160,15 @@ export default function PostsPage() {
                     : "—"}
                 </span>
                 <div className="flex-1 min-w-0">
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm group-hover:underline underline-offset-4 transition-colors inline-flex items-baseline gap-1.5 flex-wrap"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    <span className="break-words">{post.title}</span>
-                    {post.is_featured && (
-                      <span className="badge-featured text-[10px]">Featured</span>
-                    )}
-                    {isExternal && domain && (
-                      <span className="text-xs shrink-0" style={{ color: "var(--text-tertiary)" }}>
-                        ↗ {domain}
-                      </span>
-                    )}
-                  </a>
+                  {isLocal ? (
+                    <Link href={post.url} className={linkClass} style={linkStyle}>
+                      {linkInner}
+                    </Link>
+                  ) : (
+                    <a href={post.url} target="_blank" rel="noopener noreferrer" className={linkClass} style={linkStyle}>
+                      {linkInner}
+                    </a>
+                  )}
                   {post.tags && post.tags.length > 0 && (
                     <div className="flex gap-1.5 mt-1.5 flex-wrap">
                       {post.tags.slice(0, 3).map((tag, idx) => (

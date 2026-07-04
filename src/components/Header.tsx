@@ -33,7 +33,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 backdrop-blur-md border-b" style={{ borderColor: "var(--border)", background: "color-mix(in srgb, var(--bg) 85%, transparent)", zIndex: 1000 }}>
+    <header className="sticky top-0 backdrop-blur-md" style={{ background: "color-mix(in srgb, var(--bg) 85%, transparent)", zIndex: 1000 }}>
       <nav className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
         <Link
@@ -45,20 +45,25 @@ export function Header() {
             <img
               src={avatarUrl}
               alt="Animesh Pathak"
-              className="w-7 h-7 rounded-full object-cover"
+              className="w-9 h-9 rounded-full object-cover shrink-0"
               style={{ border: "2px solid var(--accent)" }}
             />
           ) : (
             <span
-              className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
               style={{ background: "var(--accent)", color: "#fff" }}
             >
               AP
             </span>
           )}
-          <span className="text-sm font-medium hidden sm:inline" style={{ color: "var(--text-primary)" }}>
-            Animesh Pathak
-          </span>
+          <div className="hidden sm:flex flex-col leading-tight">
+            <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+              Animesh Pathak
+            </span>
+            <span className="text-xs" style={{ color: "var(--accent)" }}>
+              @sonichigo
+            </span>
+          </div>
           <span className="text-sm font-medium sm:hidden" style={{ color: "var(--text-primary)" }}>
             @sonichigo
           </span>
