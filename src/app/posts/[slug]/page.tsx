@@ -15,7 +15,7 @@ interface Post {
   keywords?: string[];
   tags: string[];
   content: string;
-  keyTakeaways?: string[];
+  tldr?: string[];
 }
 
 async function getPost(slug: string): Promise<Post | null> {
@@ -33,7 +33,7 @@ async function getPost(slug: string): Promise<Post | null> {
       keywords: data.keywords || [],
       tags: data.tags || [],
       content,
-      keyTakeaways: data.keyTakeaways || [],
+      tldr: data.tldr || [],
     };
   } catch (error) {
     console.error("Error reading post:", error);

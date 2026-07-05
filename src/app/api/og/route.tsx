@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
 
     const title = searchParams.get('title') || 'Animesh Pathak';
-    const subtitle = searchParams.get('subtitle') || 'DevRel, OSS Contributor & Writer';
+    const subtitle = searchParams.get('subtitle') || 'DevRel, OSS Contributor & Cloud Native';
     const type = searchParams.get('type') || 'default';
 
     return new ImageResponse(

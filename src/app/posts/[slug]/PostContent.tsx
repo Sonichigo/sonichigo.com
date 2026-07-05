@@ -12,7 +12,7 @@ interface Post {
   excerpt: string;
   tags: string[];
   content: string;
-  keyTakeaways?: string[];
+  tldr?: string[];
 }
 
 interface Heading {
@@ -274,7 +274,7 @@ export default function PostContent({ post }: { post: Post | null }) {
 
         {/* ── Main content ── */}
         <main className="flex-1 min-w-0 max-w-3xl pt-8">
-          {/* Mobile back link — hidden on lg where sidebar is visible */}
+          {/* Mobile back link - hidden on lg where sidebar is visible */}
           <Link
             href="/posts"
             className="lg:hidden inline-flex items-center gap-1.5 text-sm font-semibold tracking-wide hover:underline underline-offset-4 transition-colors mb-6"
@@ -336,7 +336,7 @@ export default function PostContent({ post }: { post: Post | null }) {
               </p>
             )}
 
-            {/* Tags — visible on mobile only (sidebar is hidden) */}
+            {/* Tags - visible on mobile only (sidebar is hidden) */}
             {post.tags.length > 0 && (
               <div className="mt-5 flex items-center gap-2 flex-wrap lg:hidden">
                 {post.tags.map((tag) => (
@@ -351,7 +351,7 @@ export default function PostContent({ post }: { post: Post | null }) {
           </header>
 
           {/* Key Takeaways callout */}
-          {post.keyTakeaways && post.keyTakeaways.length > 0 && (
+          {post.tldr && post.tldr.length > 0 && (
             <div
               className="mb-10 rounded-xl p-6 border"
               style={{
@@ -375,11 +375,11 @@ export default function PostContent({ post }: { post: Post | null }) {
                   className="text-xs font-bold tracking-widest uppercase"
                   style={{ color: "var(--accent-green)" }}
                 >
-                  Key Takeaways
+                  TLDR;
                 </span>
               </div>
               <ul className="space-y-3">
-                {post.keyTakeaways.map((item, i) => (
+                {post.tldr.map((item, i) => (
                   <li
                     key={i}
                     className="flex gap-3 text-sm leading-relaxed"

@@ -157,7 +157,7 @@ export default function PostsPage() {
                         day: "numeric",
                         year: "numeric",
                       })
-                    : "—"}
+                    : "-"}
                 </span>
                 <div className="flex-1 min-w-0">
                   {isLocal ? (

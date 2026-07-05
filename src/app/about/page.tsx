@@ -21,11 +21,11 @@ export default async function AboutPage() {
             className="text-xs uppercase tracking-[0.2em] mb-4"
             style={{ color: "var(--text-tertiary)" }}
           >
-            // who am I
+            // $WHOAMI
           </h2>
           <div className="space-y-4 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
             <p>
-              I&apos;m <strong style={{ color: "var(--text-primary)" }}>Animesh Pathak</strong> — a Developer Relations
+              I&apos;m <strong style={{ color: "var(--text-primary)" }}>Animesh Pathak</strong> - a Developer Relations
               Engineer currently at{" "}
               <a
                 href="https://harness.io"
@@ -68,7 +68,7 @@ export default async function AboutPage() {
             className="text-xs uppercase tracking-[0.2em] mb-4"
             style={{ color: "var(--text-tertiary)" }}
           >
-            // what I do
+            // $WHATIDO
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[

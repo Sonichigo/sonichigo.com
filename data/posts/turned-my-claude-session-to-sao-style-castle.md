@@ -11,9 +11,9 @@ tags:
   - AI workspace
   - Claude Code
   - SAO
-keyTakeaways:
+tldr:
   - You can turn Claude Code session history into a visual, floor-by-floor map inspired by SAO's Aincrad castle
-  - Each floor is themed after the type of work done in that session — code, docs, slides, etc.
+  - Each floor is themed after the type of work done in that session - code, docs, slides, etc.
   - The skill reads recent session transcripts and renders a full castle with boss floors for the most recent sessions
   - It's a creative way to navigate and rediscover past projects without digging through raw chat logs
 ---

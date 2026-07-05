@@ -120,7 +120,7 @@ const postsOgDir = path.join(ogImagesDir, 'posts');
 // Generate default portfolio OG image HTML
 const defaultHTML = generateOGImageHTML(
   'Animesh Pathak',
-  'DevRel, OSS Contributor & Writer'
+  'DevRel, OSS Contributor & Cloud Native'
 );
 fs.writeFileSync(path.join(ogImagesDir, 'default.html'), defaultHTML);
 

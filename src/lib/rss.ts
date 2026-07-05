@@ -55,7 +55,7 @@ const KEPLOY_MAX_PAGES = 20; // Increased to capture all posts (~10 posts per pa
 // Harness: static fallback (Webflow site, can't scrape or filter RSS by author)
 const HARNESS_POSTS: Post[] = [
   {
-    id: 0, title: "From Chaos to Control Vol 1 — Captain Canary Comic",
+    id: 0, title: "From Chaos to Control Vol 1 - Captain Canary Comic",
     url: "https://www.harness.io/blog/from-chaos-to-control-vol-1",
     source: "harness", published_at: "2026-03-01",
     excerpt: "Introducing the Database DevOps comic series.", tags: ["database", "devops"], image_url: null, is_featured: false,

@@ -63,7 +63,7 @@ export default function HomeContent({
       {/* Hero */}
       <section className="pt-8 pb-16">
         <div className="flex flex-col-reverse sm:flex-row sm:items-start sm:justify-between gap-8 mb-8">
-          {/* Left — text */}
+          {/* Left - text */}
           <div className="flex-1 flex flex-col justify-between">
             <div>
               <p
@@ -84,7 +84,7 @@ export default function HomeContent({
                 className="text-xs mb-8 tracking-wider"
                 style={{ color: "var(--accent)" }}
               >
-                [ DevRel · OSS · eBPF · Cloud Native · Writer ]
+                [ DevRel · OSS · eBPF · Cloud Native · CI/CD · APIs · Testing ]
               </div>
             </div>
 
@@ -113,12 +113,12 @@ export default function HomeContent({
                 I help developers and communities understand modern tooling
                 through hands-on demos, real-world architecture, and clear
                 storytelling. I turn complex systems into practical, usable
-                knowledge — from eBPF tracing to CI/CD pipelines.
+                knowledge - from eBPF tracing to CI/CD pipelines.
               </p>
             </div>
           </div>
 
-          {/* Right — profile picture */}
+          {/* Right - profile picture */}
           <div className="shrink-0 self-start">
             <div
               className="relative w-40 h-48 sm:w-56 sm:h-64 lg:w-64 lg:h-80 rounded-xl overflow-hidden"

@@ -26,7 +26,7 @@
     --bg: #0a0a0a;
     --bg-secondary: #141414;
     --text-primary: #e5e5e5;
-    --text-secondary: #e5e5e5;
+    --text-secondary: #a3a3a3;
     --text-tertiary: #525252;
     --border: #262626;
     --accent: #3b82f6;
@@ -39,6 +39,11 @@
     --code-bg: #1a1a1a;
   }
 
+  .dark ::selection {
+    background: #3b82f6;
+    color: #000;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -49,6 +54,7 @@
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
@@ -83,6 +89,12 @@
   .nav-link.active::before {
     @apply opacity-100;
   }
+  .nav-link.active::after {
+    content: "█";
+    @apply ml-0.5 text-xs;
+    color: var(--accent);
+    animation: blink 1.2s step-end infinite;
+  }
 
   .section-container {
     @apply max-w-3xl mx-auto px-6 py-16;
@@ -99,13 +111,13 @@
   }
 
   .card-base {
-    @apply rounded-lg p-5 transition-all duration-300 border;
+    @apply rounded-lg p-5 transition-all duration-300;
     background: var(--bg-secondary);
-    border-color: var(--border);
+    border: 1px dashed var(--border);
   }
   .card-base:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent-dim);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 8px var(--accent-dim);
   }
 
   .tag-pill {
@@ -301,6 +313,32 @@
   color: var(--text-secondary);
 }
 
+/* Scanlines */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+.dark > body::after {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -314,4 +352,14 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-tertiary);
+}
+
+@keyframes boot-line {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes boot-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; pointer-events: none; }
 }

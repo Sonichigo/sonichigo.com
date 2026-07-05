@@ -2,38 +2,45 @@
 title: 'Model Context Protocol: v2 Stateless Architecture Explained'
 date: '2026-07-04'
 excerpt: >-
-  Learn what's changing in the upcoming Model Context Protocol 2026-07-28
+  Learn what's changing in the upcoming Model Context Protocol July 2026
   specification, including its stateless architecture, SDK updates, and
   migration steps.
-tags: [MCP, AI protocols, stateless architecture]
-keyTakeaways: 
-  - The Model Context Protocol (MCP) is moving to a stateless architecture in the 2026-07-28 specification
-  - Protocol-level sessions are being removed, simplifying deployments and scaling
-  - Every request will carry its own context, making servers easier to scale and maintain
-  - New HTTP headers (`Mcp-Method` and `Mcp-Name`) are required for routing requests
-  - Explicit state handles (like `job_id`, `basket_id`, `conversation_id`) replace sessions for multi-request workflows
+tags:
+  - MCP
+  - AI protocols
+  - stateless architecture
 ---
 
 The **Model Context Protocol (MCP)** has quickly become the standard way to connect AI models with external tools, databases, APIs, and services.
 
 Since its launch, developers have built thousands of MCP servers that help AI applications interact with external systems in a standard way.
 
-On **May 21, 2026**, the MCP community published the **2026-07-28 Release Candidate**, introducing the biggest architectural change since the protocol was first released. If adopted as planned, the **2026-07-28 specification**, scheduled for **July 28, 2026**, will move MCP to a **stateless architecture**.
+On **May 21, 2026**, the MCP community published the **2026-07-28 Release Candidate**, introducing the biggest architectural change since the protocol was first released. If adopted as planned, the specification is scheduled for **July 28, 2026**, will move MCP to a **stateless architecture**.
 
 This is a major change for developers. It removes protocol-level sessions, simplifies deployments, and makes MCP servers much easier to scale in production. Let's look at what is changing and how you can prepare for it.
+
+## How MCP Worked Before
+
+Before the upcoming July 2026 specification, MCP used a stateful protocol. 
+When a client connected to an MCP server, it first established a session through an initialize request. The server responded with its capabilities, and the client acknowledged the connection with an initialized notification. From that point onward, the server maintained information about that client for the lifetime of the session. Because the server stored session information, every request from the same client had to reach the same server instance. This worked well for smaller deployments, but it introduced several operational challenges as MCP adoption grew.
+
+### Why Stateful Protocols Become Difficult to Scale?
+Imagine you deploy three MCP servers behind a load balancer.
+![old-mcp-arch.png](/assets/img/blog-data/old-mcp-arch.png)
+
+A client connects to Server A and creates a session there. If the next request is routed to Server B, that server has no knowledge of the existing session. The request either fails or must be redirected back to Server A. To avoid this, deployments often relied on sticky sessions, where the load balancer always routes a client to the same server. While effective, sticky sessions introduce several drawbacks:
+- Scaling becomes more difficult because requests cannot be evenly distributed.
+- If the server holding the session fails, active clients may lose their session.
+- Autoscaling becomes less efficient because servers cannot process requests interchangeably.
+- Session storage adds operational complexity.
+These challenges are common in distributed systems, which is why many modern protocols have moved toward stateless designs. So how does the new specification solve these limitations?
 
 ## Why Is MCP Moving to a Stateless Architecture?
 
 ![MCP Moving to a Stateless Architecture](/assets/img/blog-data/mcp-arch-update.png)
 
-Earlier MCP specifications relied on protocol-level sessions. After connecting, a client established a session that the server maintained across multiple requests. While this worked well for many use cases, it also introduced several infrastructure challenges:
-
-* Servers had to maintain session state.
-* Load balancers often required sticky sessions.
-* Horizontal scaling became more difficult.
-* Recovering from server failures was more complex.
-
-The upcoming **2026-07-28 specification** removes protocol-managed sessions entirely. Instead, every request becomes self-contained. Any server instance can process any request without relying on previous interactions. This aligns MCP with modern cloud-native architecture, where stateless services are easier to deploy, scale, and maintain.
+The limitations of protocol-level sessions became more noticeable as MCP deployments grew beyond single-server environments. The upcoming 28th July 2026 specification addresses these challenges by removing protocol-managed sessions entirely. Instead, every request becomes self-contained, allowing any server instance to process it without relying on previous interactions.
+This design makes MCP easier to deploy behind standard load balancers, improves reliability, and aligns the protocol with modern cloud-native architectures.
 
 ## What Is Changing?
 
@@ -78,30 +85,48 @@ For example:
 
 The server simply processes the identifier provided in the request. No protocol-level session is required.
 
+| Stateful MCP (Earlier Specs)      | Stateless MCP (2026 July 28 RC)         |
+| --------------------------------- | --------------------------------------- |
+| Uses protocol-level sessions      | No protocol-level sessions              |
+| Requires `initialize` handshake   | Uses `server/discover`                  |
+| Server stores client state        | Every request is self-contained         |
+| Often needs sticky sessions       | Any server can process any request      |
+| Harder to scale horizontally      | Easier to scale and load balance        |
+| Recovery depends on session state | Requests can be retried on any instance |
+
+
 ## Why This Change Matters
 
-Moving to a stateless architecture offers several practical benefits.
-
-1. **Easier Horizontal Scaling** : Since every request is independent, any server instance can process it, there is no need for sticky sessions or shared session storage.
-2. **Better Reliability**: If one server instance becomes unavailable, another instance can immediately continue serving requests. This improves resilience and reduces downtime.
-3. **Simpler Cloud Deployments** : Stateless services work naturally with Kubernetes, serverless platforms, and modern load balancers. This makes production deployments simpler and easier to manage.
+1. **Better Scalability**: Deploy MCP servers behind any standard load balancer without sticky sessions.
+2. **Improved Reliability**: A failed server no longer interrupts active clients because requests are self-contained.
+3. **Lower Operational Complexity**: No session storage, simpler autoscaling, and easier Kubernetes deployments.
 
 ![Horizontal Scaling](/assets/img/blog-data/horizontal-scaling.png)
+
+## SDK Changes You Should Ensure
+Migrating to the upcoming specification requires more than updating a version number.
+
+### Python SDK
+The updated Python SDK is available as: "`mcp 2.0.0b1`"
+This release candidate implements the upcoming protocol changes.
+
+###TypeScript SDK
+The TypeScript SDK has been split into two packages.
+Previous package: "`@modelcontextprotocol/sdk`"
+New packages:
+- "`@modelcontextprotocol/server`"
+- "`@modelcontextprotocol/client`"
+Projects migrating to the new architecture will need to update their dependencies and imports.
 
 ## Deprecation Policy
 
 The upcoming specification also introduces an official **12-month deprecation policy**. The following protocol features are marked for deprecation:
-
 * Roots
 * Sampling
 * Logging
 
-Assuming the **2026-07-28 specification** is finalized as planned, these features will remain supported for approximately **12 months after the final release**, giving developers time to migrate.
-
-Over time, these capabilities are expected to move toward:
-
-* Direct LLM provider APIs
-* OpenTelemetry for logging and observability
+These features will remain supported for approximately **12 months after the final release**, giving developers time to migrate.
+![SSE to Streamable HTTP.png](/assets/img/blog-data/SSE to Streamable HTTP.png)
 
 ## Migration Checklist
 
@@ -120,6 +145,6 @@ If you're preparing for the upcoming specification, here are the key changes to 
 
 ## Final Thoughts
 
-The upcoming **2026-07-28 Model Context Protocol specification** represents one of the biggest architectural changes since MCP was introduced. By removing protocol-level sessions, the protocol becomes easier to scale, simpler to deploy, and better suited for modern cloud-native infrastructure.
+The upcoming **Model Context Protocol specification** represents one of the biggest architectural changes since MCP was introduced. By removing protocol-level sessions, the protocol becomes easier to scale, simpler to deploy, and better suited for modern cloud-native infrastructure.
 
 Although these changes introduce breaking updates, they also remove many of the operational challenges that developers faced when deploying MCP servers in production. If you're building or maintaining an MCP server, now is a good time to start testing the release candidate and preparing your applications for the upcoming specification. Early testing will make the transition smoother once the final specification is published.

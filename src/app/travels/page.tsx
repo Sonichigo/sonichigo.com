@@ -98,7 +98,7 @@ export default function TravelsPage() {
     <div className="max-w-7xl mx-auto px-6 py-16">
       <h1 className="page-title">Places</h1>
       <p className="page-subtitle">
-        Cities and countries I have travelled to — for conferences, meetups, and
+        Cities and countries I have travelled to - for conferences, meetups, and
         exploration.
       </p>
 

@@ -6,14 +6,14 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Animesh Pathak | DevRel, OSS Contributor & Writer",
-    template: "%s — Animesh Pathak",
+    default: "Animesh Pathak | DevRel, OSS Contributor & Cloud Native",
+    template: "%s | Animesh Pathak",
   },
   description:
     "Developer Relations Engineer. Open source contributor, speaker, and writer. Building and breaking tools to learn more.",
   metadataBase: new URL("https://sonichigo.com"),
   openGraph: {
-    title: "Animesh Pathak | DevRel, OSS Contributor & Writer",
+    title: "Animesh Pathak | DevRel, OSS Contributor & Cloud Native",
     description: "Developer Relations Engineer. Open source contributor, speaker, and writer. Building and breaking tools to learn more.",
     url: "https://sonichigo.com",
     siteName: "sonichigo.com",
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
         url: "/api/og?title=Animesh%20Pathak&subtitle=DevRel%2C%20OSS%20Contributor%20%26%20Writer&type=default",
         width: 1200,
         height: 630,
-        alt: "Animesh Pathak - DevRel, OSS Contributor & Writer",
+        alt: "Animesh Pathak | DevRel, OSS Contributor & Cloud Native",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@sonichigo1219",
-    title: "Animesh Pathak | DevRel, OSS Contributor & Writer",
+    title: "Animesh Pathak | DevRel, OSS Contributor & Cloud Native",
     description: "Developer Relations Engineer. Open source contributor, speaker, and writer. Building and breaking tools to learn more.",
     images: ["/api/og?title=Animesh%20Pathak&subtitle=DevRel%2C%20OSS%20Contributor%20%26%20Writer&type=default"],
   },
