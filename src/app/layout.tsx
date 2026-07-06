@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  verification: {
+    google: "cZ_3DAOYl2wChO4aj_e6XI92-GDHBjvB9DFhFEhLMgA",
+  },
   title: {
     default: "Animesh Pathak | DevRel, OSS Contributor & Cloud Native",
     template: "%s | Animesh Pathak",
@@ -56,6 +60,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
