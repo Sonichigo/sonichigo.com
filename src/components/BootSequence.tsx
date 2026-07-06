@@ -1,34 +1,40 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const LINES = [
+  { text: "BIOS v2.4.1", status: "OK" },
+  { text: "Loading kernel modules", status: "OK" },
+  { text: "Initializing network stack", status: "OK" },
+  { text: "Mounting /dev/sda1 → /", status: "OK" },
+  { text: "Starting system services", status: "OK" },
   { text: "Loading profile: sonichigo", status: "OK" },
   { text: ":: SYSTEM.INIT() ::", status: null },
   { text: "Welcome, Animesh Pathak", status: null },
 ];
 
-const LINE_DELAY = 160;  // ms between each line appearing
-const HOLD       = 450;  // ms to hold after last line before fading
-const FADE       = 450;  // ms fade-out duration
+const LINE_DELAY = 600;   // ms between each line appearing
+const TOTAL_MS   = 5000; // hard 30s minimum before fade starts
+const FADE       = 800;   // ms fade-out duration
+
+// module-level flag survives Strict Mode's mount→unmount→remount cycle
+let bootRan = false;
 
 export function BootSequence() {
-  const [active, setActive] = useState(false);
-  const [done,   setDone]   = useState(false);
-  const ran = useRef(false);
+  const [active,  setActive]  = useState(false);
+  const [fading,  setFading]  = useState(false);
+  const [done,    setDone]    = useState(false);
 
   useEffect(() => {
-    // ran.current persists across Strict Mode remounts; prevents double-execution
-    if (ran.current) return;
-    ran.current = true;
-    if (sessionStorage.getItem("boot-done")) return;
-    sessionStorage.setItem("boot-done", "1");
+    if (bootRan) return;
+    bootRan = true;
     setActive(true);
+    // no cleanup — these timers must always fire
+    setTimeout(() => setFading(true), TOTAL_MS);
+    setTimeout(() => setDone(true), TOTAL_MS + FADE);
   }, []);
 
   if (!active || done) return null;
-
-  const fadeDelay = LINES.length * LINE_DELAY + HOLD;
 
   return (
     <div
@@ -40,9 +46,10 @@ export function BootSequence() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        animation: `boot-fade-out ${FADE}ms ease ${fadeDelay}ms forwards`,
+        opacity: fading ? 0 : 1,
+        transition: fading ? `opacity ${FADE}ms ease` : "none",
+        pointerEvents: fading ? "none" : "all",
       }}
-      onAnimationEnd={() => setDone(true)}
     >
       <div
         style={{
