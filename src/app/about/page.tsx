@@ -4,6 +4,30 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: "About",
+  description:
+    "Animesh Pathak — Developer Relations Engineer at Harness, CNCF community organizer, Gold Microsoft Learn Student Ambassador, open source contributor, and conference speaker based in India.",
+  keywords: [
+    "Animesh Pathak",
+    "Developer Relations",
+    "Harness Database DevOps",
+    "Keploy",
+    "CNCG Noida",
+    "CNCF community",
+    "open source contributor",
+    "Gold Microsoft Learn Student Ambassador",
+    "cloud native India",
+    "DevRel India",
+  ],
+  alternates: {
+    canonical: "https://sonichigo.com/about",
+  },
+  openGraph: {
+    title: "About Animesh Pathak",
+    description:
+      "DevRel at Harness, CNCG Noida organizer, Gold MLSA, and open source contributor. Focused on Database DevOps, eBPF testing, and cloud-native ecosystems.",
+    url: "https://sonichigo.com/about",
+    type: "profile",
+  },
 };
 
 export default async function AboutPage() {
@@ -113,7 +137,7 @@ export default async function AboutPage() {
             {[
               { label: "GitHub", url: "https://github.com/sonichigo", handle: "@sonichigo" },
               { label: "LinkedIn", url: "https://linkedin.com/in/sonichigo", handle: "in/sonichigo" },
-              { label: "X / Twitter", url: "https://x.com/sonichigo", handle: "@sonichigo1219" },
+              { label: "X / Twitter", url: "https://x.com/sonichigo", handle: "@sonichigo" },
               { label: "Blog", url: "https://sonichigo.hashnode.dev", handle: "sonichigo.hashnode.dev" },
               { label: "Credly", url: "https://www.credly.com/users/sonichigo", handle: "Certifications & Badges" },
               { label: "Sponsor", url: "https://github.com/sponsors/sonichigo", handle: "Buy me a coffee" },
