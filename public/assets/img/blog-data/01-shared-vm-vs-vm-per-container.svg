@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="470" fill="#ffffff"/>
+
+  <!-- ===== LEFT PANEL: Docker Desktop / Colima ===== -->
+  <text x="237" y="38" font-size="15" font-weight="600" fill="#333333" text-anchor="middle">Docker Desktop / Colima / OrbStack (shared-VM model)</text>
+
+  <!-- macOS host -->
+  <rect x="30" y="56" width="415" height="330" rx="8" fill="#F7F7F7" stroke="#999999" stroke-width="1.5"/>
+  <text x="48" y="80" font-size="12" font-weight="600" fill="#666666">macOS host (Apple Silicon)</text>
+
+  <!-- shared Linux VM -->
+  <rect x="52" y="96" width="371" height="252" rx="8" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+  <text x="237" y="120" font-size="12.5" font-weight="600" fill="#3D5C3A" text-anchor="middle">shared Linux VM — one kernel for everything</text>
+
+  <!-- three containers inside shared VM -->
+  <g>
+    <rect x="68" y="140" width="106" height="150" rx="6" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
+    <text x="121" y="166" font-size="12" font-weight="600" fill="#2F4D71" text-anchor="middle">mcp-A</text>
+    <text x="121" y="184" font-size="10.5" fill="#4A6892" text-anchor="middle">container</text>
+    <line x1="82" y1="196" x2="160" y2="196" stroke="#6C8EBF" stroke-width="1" opacity="0.5"/>
+    <text x="121" y="216" font-size="10.5" fill="#4A6892" text-anchor="middle">namespaces</text>
+    <text x="121" y="232" font-size="10.5" fill="#4A6892" text-anchor="middle">cgroups</text>
+    <text x="121" y="256" font-size="10.5" font-weight="600" fill="#8A5A00" text-anchor="middle">kernel: shared</text>
+  </g>
+  <g>
+    <rect x="185" y="140" width="106" height="150" rx="6" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
+    <text x="238" y="166" font-size="12" font-weight="600" fill="#2F4D71" text-anchor="middle">mcp-B</text>
+    <text x="238" y="184" font-size="10.5" fill="#4A6892" text-anchor="middle">container</text>
+    <line x1="199" y1="196" x2="277" y2="196" stroke="#6C8EBF" stroke-width="1" opacity="0.5"/>
+    <text x="238" y="216" font-size="10.5" fill="#4A6892" text-anchor="middle">namespaces</text>
+    <text x="238" y="232" font-size="10.5" fill="#4A6892" text-anchor="middle">cgroups</text>
+    <text x="238" y="256" font-size="10.5" font-weight="600" fill="#8A5A00" text-anchor="middle">kernel: shared</text>
+  </g>
+  <g>
+    <rect x="302" y="140" width="106" height="150" rx="6" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
+    <text x="355" y="166" font-size="12" font-weight="600" fill="#2F4D71" text-anchor="middle">mcp-C</text>
+    <text x="355" y="184" font-size="10.5" fill="#4A6892" text-anchor="middle">container</text>
+    <line x1="316" y1="196" x2="394" y2="196" stroke="#6C8EBF" stroke-width="1" opacity="0.5"/>
+    <text x="355" y="216" font-size="10.5" fill="#4A6892" text-anchor="middle">namespaces</text>
+    <text x="355" y="232" font-size="10.5" fill="#4A6892" text-anchor="middle">cgroups</text>
+    <text x="355" y="256" font-size="10.5" font-weight="600" fill="#8A5A00" text-anchor="middle">kernel: shared</text>
+  </g>
+
+  <text x="237" y="326" font-size="10.5" fill="#3D5C3A" text-anchor="middle" font-style="italic">one VM idles in the background (~GBs of RAM)</text>
+
+  <text x="237" y="412" font-size="12" fill="#555555" text-anchor="middle">isolation boundary = kernel namespaces</text>
+  <text x="237" y="432" font-size="11.5" fill="#8A5A00" text-anchor="middle">a container escape lands in the shared kernel</text>
+
+  <!-- ===== RIGHT PANEL: apple/container ===== -->
+  <text x="722" y="38" font-size="15" font-weight="600" fill="#333333" text-anchor="middle">apple/container 1.0 (VM-per-container model)</text>
+
+  <!-- macOS host -->
+  <rect x="515" y="56" width="415" height="330" rx="8" fill="#F7F7F7" stroke="#999999" stroke-width="1.5"/>
+  <text x="533" y="80" font-size="12" font-weight="600" fill="#666666">macOS host (Apple Silicon · macOS 26)</text>
+
+  <!-- three micro-VMs -->
+  <g>
+    <rect x="533" y="96" width="120" height="252" rx="8" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+    <text x="593" y="118" font-size="11.5" font-weight="600" fill="#3D5C3A" text-anchor="middle">micro-VM</text>
+    <text x="593" y="134" font-size="10" fill="#3D5C3A" text-anchor="middle">own Linux kernel</text>
+    <rect x="547" y="148" width="92" height="150" rx="6" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
+    <text x="593" y="174" font-size="12" font-weight="600" fill="#2F4D71" text-anchor="middle">mcp-A</text>
+    <text x="593" y="192" font-size="10.5" fill="#4A6892" text-anchor="middle">container</text>
+    <line x1="559" y1="204" x2="627" y2="204" stroke="#6C8EBF" stroke-width="1" opacity="0.5"/>
+    <text x="593" y="224" font-size="10.5" fill="#4A6892" text-anchor="middle">own IP</text>
+    <text x="593" y="240" font-size="10.5" fill="#4A6892" text-anchor="middle">own rootfs</text>
+    <text x="593" y="264" font-size="10.5" font-weight="600" fill="#2E6B2E" text-anchor="middle">kernel: private</text>
+    <text x="593" y="330" font-size="10" fill="#3D5C3A" text-anchor="middle">vminitd · boots &lt;1s</text>
+  </g>
+  <g>
+    <rect x="663" y="96" width="120" height="252" rx="8" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+    <text x="723" y="118" font-size="11.5" font-weight="600" fill="#3D5C3A" text-anchor="middle">micro-VM</text>
+    <text x="723" y="134" font-size="10" fill="#3D5C3A" text-anchor="middle">own Linux kernel</text>
+    <rect x="677" y="148" width="92" height="150" rx="6" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
+    <text x="723" y="174" font-size="12" font-weight="600" fill="#2F4D71" text-anchor="middle">mcp-B</text>
+    <text x="723" y="192" font-size="10.5" fill="#4A6892" text-anchor="middle">container</text>
+    <line x1="689" y1="204" x2="757" y2="204" stroke="#6C8EBF" stroke-width="1" opacity="0.5"/>
+    <text x="723" y="224" font-size="10.5" fill="#4A6892" text-anchor="middle">own IP</text>
+    <text x="723" y="240" font-size="10.5" fill="#4A6892" text-anchor="middle">own rootfs</text>
+    <text x="723" y="264" font-size="10.5" font-weight="600" fill="#2E6B2E" text-anchor="middle">kernel: private</text>
+    <text x="723" y="330" font-size="10" fill="#3D5C3A" text-anchor="middle">vminitd · boots &lt;1s</text>
+  </g>
+  <g>
+    <rect x="793" y="96" width="120" height="252" rx="8" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+    <text x="853" y="118" font-size="11.5" font-weight="600" fill="#3D5C3A" text-anchor="middle">micro-VM</text>
+    <text x="853" y="134" font-size="10" fill="#3D5C3A" text-anchor="middle">own Linux kernel</text>
+    <rect x="807" y="148" width="92" height="150" rx="6" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
+    <text x="853" y="174" font-size="12" font-weight="600" fill="#2F4D71" text-anchor="middle">mcp-C</text>
+    <text x="853" y="192" font-size="10.5" fill="#4A6892" text-anchor="middle">container</text>
+    <line x1="819" y1="204" x2="887" y2="204" stroke="#6C8EBF" stroke-width="1" opacity="0.5"/>
+    <text x="853" y="224" font-size="10.5" fill="#4A6892" text-anchor="middle">own IP</text>
+    <text x="853" y="240" font-size="10.5" fill="#4A6892" text-anchor="middle">own rootfs</text>
+    <text x="853" y="264" font-size="10.5" font-weight="600" fill="#2E6B2E" text-anchor="middle">kernel: private</text>
+    <text x="853" y="330" font-size="10" fill="#3D5C3A" text-anchor="middle">vminitd · boots &lt;1s</text>
+  </g>
+
+  <text x="722" y="412" font-size="12" fill="#555555" text-anchor="middle">isolation boundary = hypervisor (Virtualization.framework)</text>
+  <text x="722" y="432" font-size="11.5" fill="#2E6B2E" text-anchor="middle">a container escape must beat the hypervisor</text>
+
+  <!-- divider -->
+  <line x1="480" y1="56" x2="480" y2="440" stroke="#DDDDDD" stroke-width="1.5" stroke-dasharray="6,5"/>
+</svg>

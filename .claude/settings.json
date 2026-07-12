@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(grep -E '\\\\.\\(tsx|ts|js|jsx|mdx|md|css|json\\)$')",
-      "Bash(cp /Users/animeshpathak/sonichigo.com/sitemap.xml /Users/animeshpathak/sonichigo.com/public/sitemap.xml)"
+      "Bash(cp /Users/animeshpathak/sonichigo.com/sitemap.xml /Users/animeshpathak/sonichigo.com/public/sitemap.xml)",
+      "Bash(xargs ls -la)"
     ],
     "additionalDirectories": [
       "/Users/animeshpathak/sonichigo.com"

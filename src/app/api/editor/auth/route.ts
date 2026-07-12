@@ -4,9 +4,10 @@ export async function POST(request: NextRequest) {
   try {
     const { password } = await request.json();
 
-    // Simple password check - in production, use proper authentication
-    // You can set this via environment variable
-    const EDITOR_PASSWORD = process.env.EDITOR_PASSWORD || "admin123";
+    const EDITOR_PASSWORD = process.env.EDITOR_PASSWORD;
+    if (!EDITOR_PASSWORD) {
+      return NextResponse.json({ error: "Editor not configured" }, { status: 503 });
+    }
 
     if (password === EDITOR_PASSWORD) {
       return NextResponse.json({ success: true });
