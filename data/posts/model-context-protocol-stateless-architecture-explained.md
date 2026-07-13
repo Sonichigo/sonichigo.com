@@ -110,7 +110,7 @@ Migrating to the upcoming specification requires more than updating a version nu
 The updated Python SDK is available as: "`mcp 2.0.0b1`"
 This release candidate implements the upcoming protocol changes.
 
-###TypeScript SDK
+### TypeScript SDK
 The TypeScript SDK has been split into two packages.
 Previous package: "`@modelcontextprotocol/sdk`"
 New packages:

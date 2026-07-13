@@ -1,6 +1,6 @@
 ---
 title: Running MCP Servers Locally with Apple's `container`
-date: '2026-07-12'
+date: '2026-07-14'
 excerpt: >-
   Run MCP servers securely with Apple's container tool using lightweight VMs.
   Learn stdio, HTTP setup, security, and common pitfalls
