@@ -67,17 +67,16 @@ export default function HomeContent({
           <div className="flex-1 flex flex-col justify-between">
             <div>
               <p
-                className="text-xs mb-4 tracking-widest"
-                style={{ color: "var(--text-tertiary)" }}
-              >
-                01100100 01100101 01110110 01110010 01100101 01101100
-              </p>
-              <br />
-              <p
                 className="text-xs uppercase tracking-[0.3em] mb-4 system-init"
                 style={{ color: "var(--accent-green)" }}
               >
                 :: system.init() ::
+              </p>
+              <p
+                className="text-xs mb-4 tracking-widest"
+                style={{ color: "var(--text-tertiary)" }}
+              >
+                01100011 01101111 01100100 01100101 00100000 01110100 01101000 01100001 01110100 00100000 01110010 01110101 01101110 01110011 00101110 00100000 01100100 01101111 01100011 01110011 00100000 01110100 01101000 01100001 01110100 00100000 01100001 01101110 01110011 01110111 01100101 01110010 00101110
               </p>
               <br />
               <div
