@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="460" fill="#ffffff"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f2b46">Session start: with vs without AGENTS.md</text>
+
+  <!-- defs -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#5b6b7a"/>
+    </marker>
+  </defs>
+
+  <!-- WITHOUT column -->
+  <text x="235" y="72" text-anchor="middle" font-size="15" font-weight="bold" fill="#8c3b3b">Without AGENTS.md</text>
+
+  <rect x="120" y="90" width="230" height="52" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+  <text x="235" y="112" text-anchor="middle" font-size="13" fill="#3b1f1f">New session opens</text>
+  <text x="235" y="130" text-anchor="middle" font-size="12" fill="#6b3b3b">context: empty</text>
+
+  <line x1="235" y1="142" x2="235" y2="168" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="120" y="170" width="230" height="66" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+  <text x="235" y="194" text-anchor="middle" font-size="13" fill="#3b1f1f">You paste the ritual</text>
+  <text x="235" y="212" text-anchor="middle" font-size="12" fill="#6b3b3b">"here's how our project works…"</text>
+  <text x="235" y="228" text-anchor="middle" font-size="12" fill="#6b3b3b">stack, commands, boundaries</text>
+
+  <line x1="235" y1="236" x2="235" y2="262" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="120" y="264" width="230" height="66" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+  <text x="235" y="288" text-anchor="middle" font-size="13" fill="#3b1f1f">Agent still guesses</text>
+  <text x="235" y="306" text-anchor="middle" font-size="12" fill="#6b3b3b">npm test → fails → retry loop</text>
+  <text x="235" y="322" text-anchor="middle" font-size="12" fill="#6b3b3b">edits a generated file</text>
+
+  <line x1="235" y1="330" x2="235" y2="356" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="120" y="358" width="230" height="52" rx="8" fill="#f2f2f2" stroke="#999999" stroke-width="1.5"/>
+  <text x="235" y="380" text-anchor="middle" font-size="13" fill="#333">Useful work begins</text>
+  <text x="235" y="398" text-anchor="middle" font-size="12" fill="#777">…eventually. Repeat tomorrow.</text>
+
+  <!-- divider -->
+  <line x1="450" y1="62" x2="450" y2="430" stroke="#d9d9d9" stroke-width="1" stroke-dasharray="6 5"/>
+
+  <!-- WITH column -->
+  <text x="665" y="72" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f5c34">With AGENTS.md</text>
+
+  <rect x="550" y="90" width="230" height="52" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="665" y="112" text-anchor="middle" font-size="13" fill="#1f3b26">New session opens</text>
+  <text x="665" y="130" text-anchor="middle" font-size="12" fill="#4a6b52">agent checks repo root</text>
+
+  <line x1="665" y1="142" x2="665" y2="168" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="550" y="170" width="230" height="66" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+  <text x="665" y="192" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f2b46">AGENTS.md loads automatically</text>
+  <text x="665" y="210" text-anchor="middle" font-size="12" fill="#3d5a78">commands · key modules</text>
+  <text x="665" y="226" text-anchor="middle" font-size="12" fill="#3d5a78">patterns · never-touch list</text>
+
+  <line x1="665" y1="236" x2="665" y2="262" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="550" y="264" width="230" height="66" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="665" y="288" text-anchor="middle" font-size="13" fill="#1f3b26">First command is correct</text>
+  <text x="665" y="306" text-anchor="middle" font-size="12" fill="#4a6b52">make test, not npm test</text>
+  <text x="665" y="322" text-anchor="middle" font-size="12" fill="#4a6b52">generated files left alone</text>
+
+  <line x1="665" y1="330" x2="665" y2="356" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="550" y="358" width="230" height="52" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="665" y="380" text-anchor="middle" font-size="13" font-weight="bold" fill="#1f3b26">Useful work begins</text>
+  <text x="665" y="398" text-anchor="middle" font-size="12" fill="#4a6b52">from the first prompt</text>
+</svg>

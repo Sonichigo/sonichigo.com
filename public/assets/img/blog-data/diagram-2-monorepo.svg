@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="420" fill="#ffffff"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f2b46">Monorepo: the nearest AGENTS.md wins</text>
+
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#5b6b7a"/>
+    </marker>
+  </defs>
+
+  <!-- Root -->
+  <rect x="330" y="60" width="240" height="72" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+  <text x="450" y="84" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f2b46">repo/AGENTS.md</text>
+  <text x="450" y="102" text-anchor="middle" font-size="12" fill="#3d5a78">shared commands · CI rules</text>
+  <text x="450" y="118" text-anchor="middle" font-size="12" fill="#3d5a78">global never-touch list</text>
+
+  <!-- branches -->
+  <line x1="400" y1="132" x2="235" y2="188" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <line x1="500" y1="132" x2="665" y2="188" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <!-- api package -->
+  <rect x="110" y="192" width="250" height="72" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="235" y="216" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f3b26">services/api/AGENTS.md</text>
+  <text x="235" y="234" text-anchor="middle" font-size="12" fill="#4a6b52">Go patterns · store layer rules</text>
+  <text x="235" y="250" text-anchor="middle" font-size="12" fill="#4a6b52">migration policy</text>
+
+  <!-- web package -->
+  <rect x="540" y="192" width="250" height="72" rx="8" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.5"/>
+  <text x="665" y="216" text-anchor="middle" font-size="14" font-weight="bold" fill="#5c3a00">web/AGENTS.md</text>
+  <text x="665" y="234" text-anchor="middle" font-size="12" fill="#7a5a2b">React conventions · pnpm workspace</text>
+  <text x="665" y="250" text-anchor="middle" font-size="12" fill="#7a5a2b">component patterns</text>
+
+  <!-- files being edited -->
+  <line x1="235" y1="264" x2="235" y2="304" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <line x1="665" y1="264" x2="665" y2="304" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <rect x="110" y="308" width="250" height="56" rx="8" fill="#f5f5f5" stroke="#999999" stroke-width="1.5"/>
+  <text x="235" y="330" text-anchor="middle" font-size="13" fill="#333" font-family="Menlo, monospace">services/api/store/user.go</text>
+  <text x="235" y="350" text-anchor="middle" font-size="12" fill="#4a6b52">gets api rules + shared rules</text>
+
+  <rect x="540" y="308" width="250" height="56" rx="8" fill="#f5f5f5" stroke="#999999" stroke-width="1.5"/>
+  <text x="665" y="330" text-anchor="middle" font-size="13" fill="#333" font-family="Menlo, monospace">web/src/Dashboard.tsx</text>
+  <text x="665" y="350" text-anchor="middle" font-size="12" fill="#7a5a2b">gets web rules + shared rules</text>
+
+  <text x="450" y="400" text-anchor="middle" font-size="12" fill="#777">Each package describes itself. The agent reads the file closest to what it edits.</text>
+</svg>
