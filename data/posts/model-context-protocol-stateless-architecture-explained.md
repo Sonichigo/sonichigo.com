@@ -9,6 +9,13 @@ tags:
   - MCP
   - AI protocols
   - stateless architecture
+  - model context protocol
+  - model context protocol v2
+tldr:
+  - The Model Context Protocol (MCP) is moving to a stateless architecture in its July 2026 specification, removing protocol-level sessions and simplifying deployments.
+  - The initialize handshake is being removed, and every request will carry its own context, allowing any server instance to process it without relying on previous interactions.
+  - New HTTP headers (`Mcp-Method` and `Mcp-Name`) are mandatory for Streamable HTTP transports, improving routing performance.
+  - Explicit state handles replace sessions, allowing workflows to span multiple requests without protocol-level session management.
 ---
 
 The **Model Context Protocol (MCP)** has quickly become the standard way to connect AI models with external tools, databases, APIs, and services.

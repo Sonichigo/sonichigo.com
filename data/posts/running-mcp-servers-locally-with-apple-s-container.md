@@ -8,7 +8,14 @@ tags:
   - Apple container
   - MCP
   - Docker
-  - 
+  - Docker Desktop
+  - OrbStack
+  - Colima
+  - macOS 26
+tldr:
+  - Apple's `container` tool runs each container in its own lightweight VM, providing better isolation than Docker Desktop, Colima, or OrbStack on macOS.
+  - You can run stdio or HTTP MCP servers in containers, with examples provided for both.
+  - Key gotchas include flag order, macOS Local Network firewall permissions, stdout usage in stdio transport, and binding to 127.0.0.1
 ---
 Most MCP servers today run the same way: your AI client spawns `npx something` or `uvx something` directly on your laptop, and that process runs with your user, your filesystem, *your* credentials, and *your* network. We spend a lot of time arguing about which tools an agent should be allowed to call, and almost no time on the fact that the server exposing those tools is an unsandboxed process sitting right next to your SSH keys.
 
