@@ -9,6 +9,10 @@ tags:
   - OTel
   - project
   - cloud native
+tldr:
+  - OpenTelemetry (OTel) is a reporting system that relies on instrumented processes to emit spans and metrics, but it has limitations in observing certain failure modes.
+  - eBPF operates at the kernel level, allowing it to observe events that OTel cannot, such as kernel drops, CPU throttling, and process terminations.
+  - Combining OTel and eBPF provides a more complete observability solution, capturing both application-level semantics and kernel-level reality.
 ---
 Every dashboard was green. That's the part that still bothers me.
 
