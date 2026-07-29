@@ -4,10 +4,28 @@ date: '2026-07-29'
 excerpt: >-
   Learn what eBPF sees that OpenTelemetry can't from kernel drops to CPU
   throttling—and why combining both delivers true observability.
+description: >-
+  What eBPF observes that OpenTelemetry can't: kernel TCP drops, CPU
+  throttling, OOM kills, and uninstrumented services. How to combine eBPF and
+  OTel for complete Kubernetes observability.
+keywords:
+  - eBPF
+  - OpenTelemetry
+  - eBPF vs OpenTelemetry
+  - kernel observability
+  - distributed tracing
+  - Kubernetes observability
+  - eBPF monitoring
+  - OTel blind spots
+  - Inspektor Gadget
+  - observability tools
 tags:
   - eBPF
-  - OTel
-  - project
+  - OpenTelemetry
+  - observability
+  - Kubernetes
+  - distributed tracing
+  - kernel monitoring
   - cloud native
 tldr:
   - OpenTelemetry (OTel) is a reporting system that relies on instrumented processes to emit spans and metrics, but it has limitations in observing certain failure modes.

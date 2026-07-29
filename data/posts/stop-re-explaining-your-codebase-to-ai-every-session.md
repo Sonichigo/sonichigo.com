@@ -5,24 +5,30 @@ excerpt: >-
   Tired of explaining your project to Cursor, Claude Code, or Copilot every new
   session? Here's why AGENTS.md is becoming the standard way to give coding
   agents repository context.
-tags:
+description: >-
+  AGENTS.md is a single Markdown file at your repo root that coding agents like
+  Claude Code, Cursor, Copilot, and Codex CLI read automatically. Stop pasting
+  the same project context every session—write it once and every agent reads it.
+keywords:
+  - AGENTS.md
   - AGENTS.md guide
-  - AI coding assistants
+  - AI coding assistant context
   - Claude Code AGENTS.md
   - Cursor AGENTS.md
   - GitHub Copilot AGENTS.md
-  - Codex CLI AGENTS.md
+  - Codex CLI
   - AI developer workflow
   - repository context for AI
-  - AI coding best practices
   - developer productivity
-  - coding agent configuration
-  - AI code generation
-  - monorepo AI workflow
+tags:
+  - AGENTS.md
+  - AI coding assistants
+  - developer productivity
   - Claude Code
   - Cursor IDE
   - GitHub Copilot
   - Codex CLI
+  - AI developer workflow
 tldr:
   - AGENTS.md is a Markdown file at the root of your repo that provides coding agents with essential context about your project, eliminating the need to repeatedly explain it in every session.
   - It includes build commands, test procedures, key modules, code patterns, and boundaries that the agent should respect, allowing for more efficient and accurate code generation.

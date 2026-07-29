@@ -5,12 +5,29 @@ excerpt: >-
   Learn what's changing in the upcoming Model Context Protocol July 2026
   specification, including its stateless architecture, SDK updates, and
   migration steps.
+description: >-
+  A deep dive into the MCP July 2026 stateless architecture: why protocol-level
+  sessions are being removed, how explicit state handles replace them, new
+  mandatory HTTP headers, Python and TypeScript SDK changes, and a migration
+  checklist.
+keywords:
+  - Model Context Protocol
+  - MCP v2
+  - MCP stateless architecture
+  - MCP July 2026
+  - MCP migration
+  - MCP Python SDK
+  - MCP TypeScript SDK
+  - AI protocol
+  - MCP server
+  - stateless MCP
 tags:
   - MCP
-  - AI protocols
+  - Model Context Protocol
   - stateless architecture
-  - model context protocol
-  - model context protocol v2
+  - AI protocols
+  - developer tooling
+  - cloud native
 tldr:
   - The Model Context Protocol (MCP) is moving to a stateless architecture in its July 2026 specification, removing protocol-level sessions and simplifying deployments.
   - The initialize handshake is being removed, and every request will carry its own context, allowing any server instance to process it without relying on previous interactions.

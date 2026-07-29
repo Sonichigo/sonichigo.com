@@ -6,11 +6,26 @@ excerpt: >-
   sessions into a floating castle inspired by Sword Art Online's Aincrad. Each
   session becomes a unique floor based on the type of work I did, creating a
   visual and immersive way to revisit past projects.
+description: >-
+  I built a Claude Code skill that visualizes the last 20 chat sessions as an
+  Aincrad-style floating castle from Sword Art Online. Each session floor is
+  themed by the type of work done—code, docs, slides—making past projects
+  instantly navigable without digging through raw history.
+keywords:
+  - Claude Code skill
+  - Claude Code session history
+  - AI workspace visualization
+  - Sword Art Online Aincrad
+  - Claude Code custom skill
+  - AI productivity tool
+  - Claude Code project
+  - SAO floating castle
 tags:
+  - Claude Code
   - personal project
   - AI workspace
-  - Claude Code
-  - SAO
+  - developer tools
+  - creative coding
 tldr:
   - You can turn Claude Code session history into a visual, floor-by-floor map inspired by SAO's Aincrad castle
   - Each floor is themed after the type of work done in that session - code, docs, slides, etc.

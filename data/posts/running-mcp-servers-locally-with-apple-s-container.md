@@ -4,14 +4,31 @@ date: '2026-07-14'
 excerpt: >-
   Run MCP servers securely with Apple's container tool using lightweight VMs.
   Learn stdio, HTTP setup, security, and common pitfalls
+description: >-
+  How to run MCP servers inside Apple's container tool on macOS 26. Covers
+  per-container micro-VM isolation, stdio and Streamable HTTP setups, Claude
+  Desktop config, and every gotcha including macOS Local Network firewall and
+  flag-order bugs.
+keywords:
+  - Apple container
+  - MCP server container
+  - run MCP server locally
+  - Apple container macOS
+  - MCP stdio container
+  - MCP HTTP server
+  - Claude Desktop MCP
+  - macOS 26 container
+  - Docker alternative macOS
+  - container security macOS
 tags:
   - Apple container
   - MCP
-  - Docker
-  - Docker Desktop
-  - OrbStack
-  - Colima
-  - macOS 26
+  - macOS
+  - Docker alternative
+  - containerization
+  - security
+  - developer tooling
+  - Claude Desktop
 tldr:
   - Apple's `container` tool runs each container in its own lightweight VM, providing better isolation than Docker Desktop, Colima, or OrbStack on macOS.
   - You can run stdio or HTTP MCP servers in containers, with examples provided for both.
