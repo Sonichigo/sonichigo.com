@@ -47,7 +47,7 @@ Most MCP content stops at "wire up a tool that runs SQL." That's fine for a demo
 
 ## How it works
 
-![blastshield write lifecycle: db_estimate_blast_radius, db_dry_run, db_apply, db_rollback](../../public/assets/img/blog-data/blastshield-lifecycle-diagram.svg)
+![blastshield write lifecycle: db_estimate_blast_radius, db_dry_run, db_apply, db_rollback](/assets/img/blog-data/blastshield-lifecycle-diagram.svg)
 
 **Tool design: the ticket is the actual boundary, not a convention.** Rather than one `execute` tool, there are four, chained by a signed artifact instead of an instruction the model is expected to follow:
 

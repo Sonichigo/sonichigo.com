@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const LINES = [
   { text: "BIOS v2.4.1", status: "OK" },
@@ -21,12 +22,14 @@ const FADE       = 800;   // ms fade-out duration
 let bootRan = false;
 
 export function BootSequence() {
+  const pathname = usePathname();
   const [active,  setActive]  = useState(false);
   const [fading,  setFading]  = useState(false);
   const [done,    setDone]    = useState(false);
 
   useEffect(() => {
     if (bootRan) return;
+    if (pathname !== "/") return;
     bootRan = true;
     setActive(true);
     // no cleanup — these timers must always fire
