@@ -96,7 +96,7 @@ The agents never learn where the real servers live. We add a server to the gatew
 
 Consider an repo with following structure:
 
-```
+```bash
 single-gateway/
 ├── gateway/config.yaml     # the front door on :3000
 ├── gateway/llm.yaml        # optional LLM route on :4000
