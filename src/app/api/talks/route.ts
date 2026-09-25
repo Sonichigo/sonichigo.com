@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { parseTalksMarkdown } from "@/lib/markdown-parser";
 import type { Talk } from "@/lib/types";
 
-export const revalidate = 3600; // Cache for 1 hour
-export const dynamic = "force-static"; // Force static generation when possible
+export const revalidate = process.env.NODE_ENV === 'development' ? 0 : 3600; // No cache in dev, 1 hour in prod
+export const dynamic = process.env.NODE_ENV === 'development' ? 'force-dynamic' : 'force-static';
 
 export async function GET() {
   try {
@@ -16,9 +16,13 @@ export async function GET() {
       return b.date > a.date ? 1 : -1;
     });
 
+    const cacheControl = process.env.NODE_ENV === 'development'
+      ? 'no-store, must-revalidate'
+      : 'public, s-maxage=3600, stale-while-revalidate=7200';
+
     return NextResponse.json(talks as Talk[], {
       headers: {
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200",
+        "Cache-Control": cacheControl,
       },
     });
   } catch (error) {

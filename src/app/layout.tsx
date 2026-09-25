@@ -6,6 +6,17 @@ import { Analytics } from "@vercel/analytics/next";
 import {BootSequence} from "@/components/BootSequence";
 import "./globals.css";
 
+// Single source of truth for the home social card — referenced by both
+// openGraph and twitter below.
+const OG_IMAGE =
+  "/api/og?" +
+  new URLSearchParams({
+    title: "Animesh Pathak",
+    subtitle: "DevRel at Harness. Database DevOps, cloud native, and eBPF testing.",
+    tags: "DevRel,Kubernetes,eBPF,CNCF",
+    type: "default",
+  }).toString();
+
 export const metadata: Metadata = {
   verification: {
     google: "cZ_3DAOYl2wChO4aj_e6XI92-GDHBjvB9DFhFEhLMgA",
@@ -47,7 +58,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/api/og?title=Animesh%20Pathak&subtitle=DevRel%2C%20OSS%20Contributor%20%26%20Writer&type=default",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Animesh Pathak | Developer Relations Engineer & Cloud Native Speaker",
@@ -59,7 +70,7 @@ export const metadata: Metadata = {
     creator: "@sonichigo",
     title: "Animesh Pathak | Developer Relations Engineer & Cloud Native Speaker",
     description: "DevRel at Harness. OSS contributor, CNCF community organizer, and technical writer focused on Database DevOps, Kubernetes, and eBPF testing.",
-    images: ["/api/og?title=Animesh%20Pathak&subtitle=DevRel%2C%20OSS%20Contributor%20%26%20Writer&type=default"],
+    images: [OG_IMAGE],
   },
   icons: {
     icon: [

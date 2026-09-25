@@ -52,6 +52,9 @@ export async function parseTalksMarkdown(): Promise<Talk[]> {
 
       // Extract metadata lines
       const metadataLines = lines.filter((l) => l.startsWith("- **"));
+      if (metadataLines.length === 0) {
+        continue;
+      }
       const metadata = parseMetadata(metadataLines);
 
       // Extract description (everything after metadata, before ---)
@@ -116,6 +119,9 @@ export async function parseTravelsMarkdown(): Promise<Travel[]> {
 
       // Extract metadata lines
       const metadataLines = lines.filter((l) => l.startsWith("- **"));
+      if (metadataLines.length === 0) {
+        continue;
+      }
       const metadata = parseMetadata(metadataLines);
 
       // Extract notes (everything after metadata, before ---)
