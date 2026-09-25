@@ -14,12 +14,34 @@ const LINES = [
   { text: "Welcome, Animesh Pathak", status: null },
 ];
 
-const LINE_DELAY = 600;   // ms between each line appearing
-const TOTAL_MS   = 5000; // hard 30s minimum before fade starts
-const FADE       = 800;   // ms fade-out duration
+const LINE_DELAY = 260;   // ms between each line appearing
+const HOLD       = 500;   // ms to hold after the last line lands
+const TOTAL_MS   = LINE_DELAY * (LINES.length - 1) + HOLD;
+const FADE       = 500;   // ms fade-out duration
 
 // module-level flag survives Strict Mode's mount→unmount→remount cycle
 let bootRan = false;
+
+const SEEN_KEY = "boot-seen";
+
+// sessionStorage throws when storage is blocked (Safari private browsing,
+// some embedded webviews). A visitor we can't remember should still get a
+// working site — they just see the boot again.
+function hasBooted() {
+  try {
+    return window.sessionStorage.getItem(SEEN_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function rememberBoot() {
+  try {
+    window.sessionStorage.setItem(SEEN_KEY, "1");
+  } catch {
+    // no-op
+  }
+}
 
 export function BootSequence() {
   const pathname = usePathname();
@@ -29,15 +51,41 @@ export function BootSequence() {
 
   useEffect(() => {
     if (bootRan) return;
-    if (pathname !== "/") return;
     bootRan = true;
+    // only the landing page boots; deep links (/posts, /posts/*, /talks, …)
+    // must render immediately
+    if (pathname !== "/") return;
+    // once per tab session — a reload or a second visit within the session is
+    // someone who has already seen it
+    if (hasBooted()) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Recorded before the animation starts rather than after it finishes, so
+    // reloading part-way through doesn't replay it.
+    rememberBoot();
     setActive(true);
     // no cleanup — these timers must always fire
     setTimeout(() => setFading(true), TOTAL_MS);
     setTimeout(() => setDone(true), TOTAL_MS + FADE);
   }, []);
 
-  if (!active || done) return null;
+  // Let any interaction dismiss it, so the overlay is never a wait the
+  // visitor can't get out of.
+  useEffect(() => {
+    if (!active || done) return;
+    const skip = () => setDone(true);
+    window.addEventListener("pointerdown", skip);
+    window.addEventListener("keydown", skip);
+    return () => {
+      window.removeEventListener("pointerdown", skip);
+      window.removeEventListener("keydown", skip);
+    };
+  }, [active, done]);
+
+  // This component lives in the root layout, so it survives client-side
+  // navigation. Gating on pathname here (not just in the effect above) tears
+  // the overlay down in the same render as the route change — otherwise a
+  // click during the fade window carries a black screen onto /posts.
+  if (!active || done || pathname !== "/") return null;
 
   return (
     <div
@@ -51,8 +99,9 @@ export function BootSequence() {
         justifyContent: "center",
         opacity: fading ? 0 : 1,
         transition: fading ? `opacity ${FADE}ms ease` : "none",
-        pointerEvents: fading ? "none" : "all",
+        pointerEvents: fading ? "none" : "auto",
       }}
+      aria-hidden="true"
     >
       <div
         style={{

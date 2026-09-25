@@ -44,12 +44,19 @@ export default async function PostsPage() {
     getLocalPosts(),
   ]);
 
-  const posts = [...rssPosts, ...localPosts].sort((a, b) =>
-    b.published_at > a.published_at ? 1 : -1
+  // Local posts win over an RSS entry pointing at the same URL, so the list
+  // can be keyed on url alone.
+  const byUrl = new Map<string, (typeof rssPosts)[number]>();
+  for (const post of [...rssPosts, ...localPosts]) {
+    byUrl.set(post.url, post);
+  }
+
+  const posts = [...byUrl.values()].sort((a, b) =>
+    b.published_at.localeCompare(a.published_at)
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16">
+    <div className="max-w-4xl mx-auto px-6 py-16">
       <h1 className="page-title">Writing</h1>
       <p className="page-subtitle">
         Thoughts, tutorials, and deep-dives into DevOps, cloud-native, testing,
